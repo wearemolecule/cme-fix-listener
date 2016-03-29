@@ -1,0 +1,6 @@
+ruby_version: ruby-2.3.0
+bundler_version: 1.11.2
+test_pattern:
+  - spec/**/*_spec.rb
+environment:
+  TZ: America/Chicago

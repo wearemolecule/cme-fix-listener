@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FIXML s="20090815" cv="CME.0001" xv="109" v="5.0 SP2">
+	<Batch>
+		<Hdr TSub="YOUR_STP_API_USERNAME" SSub="STP" TID="COMPANY_NAME" SID="CME"/>
+		<TrdCaptRpt LastUpdateTm="2014-11-13T10:05:59.979-06:00" TxnTm="2014-11-13T10:05:59-06:00" MLegRptTyp="1" BizDt="2014-11-13" TrdDt="2014-11-13" LastPx="4.195" LastQty="4" VenuTyp="X" PxTyp="100" ExecID="1978631" MtchID="149A5C544C90003C104B8" TrdSubTyp="40" TrdTyp="0" ReqID="ABC123" TrdRptStat="0" RptTyp="101" TransTyp="2" TrdID2="149A5C544C90003C104BC" TrdID="100145" RptID="149A5C544C90003C104BC4100559979">
+			<Instrmt PxQteCcy="USD" Exch="NYMEX" UOM="MMBtu" Mult="10000" MatDt="2014-11-26" MMY="201412" SecTyp="FUT" CFI="FXXCSO" Src="H" ID="NG" Sym="NGZ4"/>
+			<RptSide CustCpcty="2" InptSrc="CPC" ClOrdID="C1978631" Side="2">
+				<Pty R="1" ID="123"/>
+        <Pty R="4" ID="123"/>
+				<Pty R="7" ID="your-company-name"/>
+        <Pty R="21" ID="CME"/>
+				<Pty R="22" ID="NYMEX"/>
+        <Pty R="24" Src="C" ID="COMPANY001">
+					<Sub Typ="26" ID="1"/>
+        </Pty>
+				<Pty R="24" Src="H" ID="A-123456"/>
+				<Pty R="30" ID="your-company-name"/>
+				<Pty R="36" ID="username">
+					<Sub Typ="9" ID="Other User"/>
+        </Pty>
+				<Pty R="62" ID="USERNAME">
+					<Sub Typ="9" ID="FULL NAME"/>
+        </Pty>
+				<RegTrdID Typ="0" Evnt="2" Src="1010000023" ID="CPC000001978631BN0001"/>
+				<TrdRegTS Typ="1" TS="2014-11-13T10:04:00-06:00"/>
+      </RptSide>
+    </TrdCaptRpt>
+	</Batch>
+</FIXML>
+
+

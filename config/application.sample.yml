@@ -1,0 +1,11 @@
+# Service config
+REQUEST_INTERVAL:     "10"
+SLEEP_INTERVAL:       "5"
+REDIS_QUEUE_NAME:     "critical"
+REDIS_CLASS_NAME:     "CmeTrdCaptRptMsg"
+
+# Account config
+ACCOUNT_HTTP_HOST: "http://localhost:8080"
+
+ENVIRONMENT:          "development"
+HONEYBADGER_API_KEY: ""

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<FIXML s="20090815" cv="CME.0001" xv="109" v="5.0 SP2">
+  <Batch>
+    <Hdr TSub="YOUR_CME_STP_API_USERNAME" SSub="STP" TID="COMPANY_NAME" SID="CME"/>
+    <TrdCaptRpt LastUpdateTm="2015-02-19T10:55:22.575-06:00" TxnTm="2015-02-19T10:55:22-06:00" MLegRptTyp="1"
+      BizDt="2015-02-19" TrdDt="2015-02-19" LastPx="3.450" LastQty="2" VenuTyp="E" PxTyp="2"
+      ExecID="47949520150219105337TN0007733" MtchID="14B996E6EF2TP0102D77FC3A" TrdTyp="0" ReqID="your-company-name" TrdRptStat="0"
+      RptTyp="101" TransTyp="2" TrdID2="14B996E6EF2TP0102D77FC3C" TrdID="123503" RptID="14B996E6EF2TP0102D77FC3C1105522575">
+	  <Instrmt PxQteCcy="USD" Exch="NYMEX" PutCall="0" UOM="MMBtu" Mult="10000" StrkPx="65.0" MatDt="2014-12-26" MMY="201501" SecTyp="OPT" CFI="OPAXPS" Src="H" ID="ON" Sym="ONF5 P65000"/>
+	  <Undly Exch="NYMEX" MMY="201501" SecTyp="FUT" Src="H" ID="NG"/>
+      <RptSide CustCpcty="4" InptSrc="GLBX" ClOrdID="6A8GE" Side="1">
+        <Pty R="1" ID="090"/>
+        <Pty R="4" ID="020"/>
+        <Pty R="7" ID="your-company-name"/>
+        <Pty R="12" ID="0B0L"/>
+        <Pty R="21" ID="CME"/>
+        <Pty R="22" ID="NYMEX"/>
+        <Pty R="24" Src="C" ID="COMPANY001">
+          <Sub Typ="26" ID="1"/>
+        </Pty>
+        <Pty R="24" Src="H" ID="A-123456"/>
+        <Pty R="44" ID="username"/>
+        <Pty R="55" ID="L83020"/>
+        <RegTrdID Typ="0" Evnt="2" Src="1010000023" ID="FECC14B996E6EF2TP0102D77FC3C"/>
+        <TrdRegTS Typ="1" TS="2015-02-19T10:53:37-06:00"/>
+      </RptSide>
+    </TrdCaptRpt>
+    <TrdCaptRpt LastUpdateTm="2015-02-19T10:55:22.957-06:00" TxnTm="2015-02-19T10:55:22-06:00" MLegRptTyp="1"
+      BizDt="2015-02-19" TrdDt="2015-02-19" LastPx="1.200" LastQty="3" VenuTyp="E" PxTyp="2"
+      ExecID="47950620150219105339TN0007734" MtchID="14B996E6EF2TP0102D77FCD8" TrdTyp="0" ReqID="your-company-name" TrdRptStat="0"
+      RptTyp="101" TransTyp="2" TrdID2="14B996E6EF2TP0102D77FCDC" TrdID="123504" RptID="14B996E6EF2TP0102D77FCDC1105522957">
+	  <Instrmt PxQteCcy="USD" Exch="NYMEX" PutCall="0" UOM="MMBtu" Mult="10000" StrkPx="65.0" MatDt="2014-12-26" MMY="201501" SecTyp="OPT" CFI="OPAXPS" Src="H" ID="ON" Sym="ONF5 P65000"/>
+	  <Undly Exch="NYMEX" MMY="201501" SecTyp="FUT" Src="H" ID="NG"/>
+      <RptSide CustCpcty="4" InptSrc="GLBX" ClOrdID="6A8GE" Side="1">
+        <Pty R="1" ID="090"/>
+        <Pty R="4" ID="020"/>
+        <Pty R="7" ID="your-company-name"/>
+        <Pty R="12" ID="0B0L"/>
+        <Pty R="21" ID="CME"/>
+        <Pty R="22" ID="NYMEX"/>
+        <Pty R="24" Src="C" ID="COMPANY002">
+          <Sub Typ="26" ID="1"/>
+        </Pty>
+        <Pty R="24" Src="H" ID="A-56326"/>
+        <Pty R="44" ID="username"/>
+        <Pty R="55" ID="L83020"/>
+        <RegTrdID Typ="0" Evnt="2" Src="1010000023" ID="FECC14B996E6EF2TP0102D77FCDC"/>
+        <TrdRegTS Typ="1" TS="2015-02-19T10:53:37-06:00"/>
+      </RptSide>
+    </TrdCaptRpt>
+    <TrdCaptRpt LastUpdateTm="2015-02-19T10:55:23.839-06:00" TxnTm="2015-02-19T10:55:23-06:00" MLegRptTyp="1"
+      BizDt="2015-02-19" TrdDt="2015-02-19" LastPx="2.909" LastQty="1" VenuTyp="E" PxTyp="2"
+      ExecID="47951620150219105339TN0007738" MtchID="14B996E6052TP0101D775602" TrdTyp="0" ReqID="your-company-name" TrdRptStat="0"
+      RptTyp="101" TransTyp="2" TrdID2="14B996E6052TP0101D775606" TrdID="123507" RptID="14B996E6052TP0101D7756061105523839">
+	  <Instrmt PxQteCcy="USD" Exch="NYMEX" PutCall="0" UOM="MMBtu" Mult="10000" StrkPx="65.0" MatDt="2014-12-26" MMY="201501" SecTyp="OPT" CFI="OPAXPS" Src="H" ID="ON" Sym="ONF5 P65000"/>
+	  <Undly Exch="NYMEX" MMY="201501" SecTyp="FUT" Src="H" ID="NG"/>
+      <RptSide CustCpcty="4" InptSrc="GLBX" ClOrdID="6A8GE" Side="1">
+        <Pty R="1" ID="090"/>
+        <Pty R="4" ID="020"/>
+        <Pty R="7" ID="your-company-name"/>
+        <Pty R="12" ID="0B0L"/>
+        <Pty R="21" ID="CME"/>
+        <Pty R="22" ID="NYMEX"/>
+        <Pty R="24" Src="C" ID="COMPANY001">
+          <Sub Typ="26" ID="1"/>
+        </Pty>
+        <Pty R="24" Src="H" ID="A-56326"/>
+        <Pty R="44" ID="username"/>
+        <Pty R="55" ID="L83020"/>
+        <RegTrdID Typ="0" Evnt="2" Src="1010000023" ID="FECC14B996E6052TP0101D775606"/>
+        <TrdRegTS Typ="1" TS="2015-02-19T10:53:37-06:00"/>
+      </RptSide>
+    </TrdCaptRpt>
+  </Batch>
+</FIXML>
+
+
+

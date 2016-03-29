@@ -1,0 +1,13 @@
+[
+  {
+    "id": 123,
+    "name": "Account1",
+    "cmeIntegrationActive": true,
+    "cmeUsername": "username",
+    "cmePassword": "password",
+    "cmeEnvironment": "Testing",
+    "cmeFirmSid": "your-company-name",
+    "cmePartyRole": "7",
+    "cmeRequestID": "your-company-name"
+  }
+]

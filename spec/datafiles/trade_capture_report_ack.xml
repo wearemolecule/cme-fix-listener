@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FIXML s="20090815" cv="CME.0001" xv="109" v="5.0 SP2">
+  <TrdCaptRptReqAck Txt="Authorization FAILED: Authenticated User does NOT belong to molecule" ReqStat="2" ReqRslt="9" SubReqTyp="1" ReqTyp="3" ReqID="your-company-name">
+    <Hdr TSub="YOUR_STP_API_USERNAME" SSub="STP" TID="COMPANY_NAME" SID="CME"/>
+  </TrdCaptRptReqAck>
+</FIXML>

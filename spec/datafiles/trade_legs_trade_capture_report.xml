@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FIXML s="20090815" cv="CME.0001" xv="109" v="5.0 SP2">
+	<Batch>
+		<Hdr TSub="YOUR_STP_API_USERNAME" SSub="STP" TID="COMPANY_NAME" SID="CME"/>
+		<TrdCaptRpt LastUpdateTm="2015-06-10T15:45:07.155-05:00" TxnTm="2015-06-10T15:45:07-05:00" MLegRptTyp="3" BizDt="2015-06-10" TrdDt="2015-06-10" LastPx="4.300" LastQty="70" VenuTyp="X" PxTyp="2" ExecID="2455473" MtchID="14DDEDEFAEF0004D4F2A" TrdTyp="1" ReqID="your-company-name" TrdRptStat="0" RptTyp="101" TransTyp="2" TrdID2="14DDEDEFAEF0004D4F2E" TrdID="101065" RptID="14DDEDEFAEF0004D4F2E3154507154">
+			<Instrmt PxQteCcy="USD" Exch="NYMEX" Mult="10000" MatDt="2015-08-27" MMY="20150900" SubTyp="GN" SecTyp="MLEG" CFI="FCEPSO" Src="H" ID="NG" Sym="NG:GN"/>
+			<TrdLeg LastPx="4.300" RefID="101066" LegNo="1" RptID="14DDEDEFAEF0004D4F30" Qty="70">
+				<Leg Side="1" Exch="NYMEX" Mult="10000" Mat="2015-08-27" MMY="20150900" SecTyp="FUT" CFI="FCEPSO" Src="H" ID="NG" Sym="NGU5"/>
+			</TrdLeg>
+			<TrdLeg LastPx="5.20" RefID="101068" LegNo="2" RptID="14DDEDEFAEF0004D4F34" Qty="800">
+				<Leg PutCall="0" Side="1" Exch="NYMEX" Mult="1000" Strk="40.0" Mat="2015-06-17" MMY="20150700" SecTyp="OPT" CFI="OPAEPS" Src="H" ID="LO" Sym="LON5 P4000"/>
+				<Undlys>
+					<Undly Exch="NYMEX" MMY="201507" SecTyp="FUT" Src="H" ID="CL"/>
+				</Undlys>
+			</TrdLeg>
+			<TrdLeg LastPx="5.20" RefID="101069" LegNo="3" RptID="14DDEDEFAEF0004D4F36" Qty="800">
+				<Leg PutCall="0" Side="1" Exch="NYMEX" Mult="1000" Strk="40.0" Mat="2015-07-16" MMY="20150800" SecTyp="OPT" CFI="OPAEPS" Src="H" ID="LO" Sym="LOQ5 P4000"/>
+				<Undlys>
+					<Undly Exch="NYMEX" MMY="201508" SecTyp="FUT" Src="H" ID="CL"/>
+				</Undlys>
+			</TrdLeg>
+			<RptSide StrategyLinkID="14DDEDEFAEF0004D4F2E" CustCpcty="2" InptSrc="CPC" ClOrdID="C2455473" Side="1">
+				<Pty R="1" ID="123"/>
+				<Pty R="4" ID="123"/>
+				<Pty R="7" ID="your-company-name"/>
+				<Pty R="21" ID="CME"/>
+				<Pty R="22" ID="NYMEX"/>
+				<Pty R="24" Src="C" ID="COMPANY001">
+					<Sub Typ="26" ID="1"/>
+				</Pty>
+				<Pty R="24" Src="H" ID="A-123456"/>
+				<Pty R="30" ID="your-company-name"/>
+				<Pty R="36" ID="username">
+					<Sub Typ="9" ID="Full Name"/>
+				</Pty>
+				<Pty R="62" ID="USERNAME">
+					<Sub Typ="9" ID="FULL NAME"/>
+				</Pty>
+				<RegTrdID LegRefID="1" Typ="0" Evnt="2" Src="1010000023" ID="CPC000002455473BN0001"/>
+				<RegTrdID LegRefID="2" Typ="0" Evnt="2" Src="1010000023" ID="CPC001002455473BN0001"/>
+				<RegTrdID LegRefID="3" Typ="0" Evnt="2" Src="1010000023" ID="CPC002002455473BN0001"/>
+				<TrdRegTS Typ="1" TS="2015-06-10T15:44:00-05:00"/>
+			</RptSide>
+		</TrdCaptRpt>
+	</Batch>
+</FIXML>

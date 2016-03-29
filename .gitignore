@@ -1,0 +1,3 @@
+/config/application.yml
+.solano*
+/config/account-config.json

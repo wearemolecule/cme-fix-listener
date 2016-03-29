@@ -1,0 +1,194 @@
+{
+  "data": [{
+    "type": "TradeCaptureReport",
+    "id": "14DDEDEFAEF0004D4F2E315450715414DDEDEFAEF0004D4F2E",
+    "attributes": {
+      "messageID": "14DDEDEFAEF0004D4F2E3154507154",
+      "tradeID": "101065",
+      "secondaryTradeID": "14DDEDEFAEF0004D4F2E",
+      "transactionType": 2,
+      "tradeReportType": 101,
+      "tradeStatus": 0,
+      "requestID": "your-company-name",
+      "tradeType": 1,
+      "tradeMatchID": "14DDEDEFAEF0004D4F2A",
+      "executionID": "2455473",
+      "priceType": 2,
+      "venueType": "X",
+      "tradeQuantity": 70.0,
+      "tradePrice": 4.300,
+      "tradeDate": "2015-06-10",
+      "clearDate": "2015-06-10",
+      "multiLegReportingType": "3",
+      "transactionTime": "2015-06-10T15:45:07-05:00",
+      "lastUpdateTime": "2015-06-10T15:45:07.155-05:00",
+      "Instrument": {
+        "productSymbol": "NG:GN",
+        "productCode": "NG",
+        "productSourceCode": "H",
+        "cfiCode": "FCEPSO",
+        "securityType": "MLEG",
+        "indexName": "GN",
+        "contractPeriodCode": "20150900",
+        "maturityDate": "2015-08-27",
+        "priceMultiplier": 10000.0,
+        "productExchange": "NYMEX",
+        "priceQuoteCurrency": "USD"
+      },
+      "TradeLegs": [{
+        "legQuantity": 70.0,
+        "legReportID": "14DDEDEFAEF0004D4F30",
+        "legNumber": 1,
+        "legReferenceID": "101066",
+        "legLastPrice": 4.300,
+        "Leg": {
+          "legSymbol": "NGU5",
+          "legProductCode": "NG",
+          "legProductIDSource": "H",
+          "legCFI": "FCEPSO",
+          "legSecurityType": "FUT",
+          "legMaturity": "20150900",
+          "legMaturityDate": "2015-08-27",
+          "legContractMultiplier": 10000.0,
+          "legProductExchange": "NYMEX",
+          "legBuySellCode": "1"
+        }
+      }, {
+        "legQuantity": 800.0,
+        "legReportID": "14DDEDEFAEF0004D4F34",
+        "legNumber": 2,
+        "legReferenceID": "101068",
+        "legLastPrice": 5.20,
+        "Leg": {
+          "legSymbol": "LON5 P4000",
+          "legProductCode": "LO",
+          "legProductIDSource": "H",
+          "legCFI": "OPAEPS",
+          "legSecurityType": "OPT",
+          "legMaturity": "20150700",
+          "legMaturityDate": "2015-06-17",
+          "legStrikePrice": 40.0,
+          "legContractMultiplier": 1000.0,
+          "legProductExchange": "NYMEX",
+          "legBuySellCode": "1",
+          "legPutCall": 0
+        },
+        "UnderlyingLegInstruments": [{
+          "legUnderlyingProductCode": "CL",
+          "legUnderlyingProductCodeSource": "H",
+          "legUnderlyingSecurityType": "FUT",
+          "legUnderlyingMaturity": "201507",
+          "legUnderlyingProductExchange": "NYMEX"
+        }]
+      }, {
+        "legQuantity": 800.0,
+        "legReportID": "14DDEDEFAEF0004D4F36",
+        "legNumber": 3,
+        "legReferenceID": "101069",
+        "legLastPrice": 5.20,
+        "Leg": {
+          "legSymbol": "LOQ5 P4000",
+          "legProductCode": "LO",
+          "legProductIDSource": "H",
+          "legCFI": "OPAEPS",
+          "legSecurityType": "OPT",
+          "legMaturity": "20150800",
+          "legMaturityDate": "2015-07-16",
+          "legStrikePrice": 40.0,
+          "legContractMultiplier": 1000.0,
+          "legProductExchange": "NYMEX",
+          "legBuySellCode": "1",
+          "legPutCall": 0
+        },
+        "UnderlyingLegInstruments": [{
+          "legUnderlyingProductCode": "CL",
+          "legUnderlyingProductCodeSource": "H",
+          "legUnderlyingSecurityType": "FUT",
+          "legUnderlyingMaturity": "201508",
+          "legUnderlyingProductExchange": "NYMEX"
+        }]
+      }],
+      "ReportSide": {
+        "buySellCode": "1",
+        "clientOrderID": "C2455473",
+        "inputSource": "CPC",
+        "cti": 2,
+        "strategyLinkID": "14DDEDEFAEF0004D4F2E",
+        "Parties": [{
+          "partyID": "123",
+          "partyRole": 1
+        }, {
+          "partyID": "123",
+          "partyRole": 4
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 7
+        }, {
+          "partyID": "CME",
+          "partyRole": 21
+        }, {
+          "partyID": "NYMEX",
+          "partyRole": 22
+        }, {
+          "partyID": "COMPANY001",
+          "partyIDSource": "C",
+          "partyRole": 24,
+          "PartySubGroup": [{
+            "partyQualifierID": "1",
+            "partyQualifierType": 26
+          }]
+        }, {
+          "partyID": "A-123456",
+          "partyIDSource": "H",
+          "partyRole": 24
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 30
+        }, {
+          "partyID": "username",
+          "partyRole": 36,
+          "PartySubGroup": [{
+            "partyQualifierID": "Full Name",
+            "partyQualifierType": 9
+          }]
+        }, {
+          "partyID": "USERNAME",
+          "partyRole": 62,
+          "PartySubGroup": [{
+            "partyQualifierID": "FULL NAME",
+            "partyQualifierType": 9
+          }]
+        }],
+        "SideRegulatoryTradeIDGroup": [{
+          "sideRegulatoryTradeID": "CPC000002455473BN0001",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0,
+          "sideRegulatoryLegReferenceID": "1"
+        }, {
+          "sideRegulatoryTradeID": "CPC001002455473BN0001",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0,
+          "sideRegulatoryLegReferenceID": "2"
+        }, {
+          "sideRegulatoryTradeID": "CPC002002455473BN0001",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0,
+          "sideRegulatoryLegReferenceID": "3"
+        }],
+        "SideTradeRegulatoryTS": [{
+          "timestamp": "2015-06-10T15:44:00-05:00",
+          "timestampType": 1
+        }]
+      }
+    }
+  }],
+  "meta": {
+    "customApplicationVersion": "CME.0001",
+    "fixmlExtensionVersion": "109",
+    "schemaReleaseDate": "20090815",
+    "fixVersionNumber": "5.0 SP2"
+  }
+}

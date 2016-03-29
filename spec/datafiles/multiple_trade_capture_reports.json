@@ -1,0 +1,306 @@
+{
+  "data": [{
+    "type": "TradeCaptureReport",
+    "id": "14B996E6EF2TP0102D77FC3C110552257514B996E6EF2TP0102D77FC3C",
+    "attributes": {
+      "messageID": "14B996E6EF2TP0102D77FC3C1105522575",
+      "tradeID": "123503",
+      "secondaryTradeID": "14B996E6EF2TP0102D77FC3C",
+      "transactionType": 2,
+      "tradeReportType": 101,
+      "tradeStatus": 0,
+      "requestID": "your-company-name",
+      "tradeType": 0,
+      "tradeMatchID": "14B996E6EF2TP0102D77FC3A",
+      "executionID": "47949520150219105337TN0007733",
+      "priceType": 2,
+      "venueType": "E",
+      "tradeQuantity": 2.0,
+      "tradePrice": 3.450,
+      "tradeDate": "2015-02-19",
+      "clearDate": "2015-02-19",
+      "multiLegReportingType": "1",
+      "transactionTime": "2015-02-19T10:55:22-06:00",
+      "lastUpdateTime": "2015-02-19T10:55:22.575-06:00",
+      "Instrument": {
+        "productSymbol": "ONF5 P65000",
+        "productCode": "ON",
+        "productSourceCode": "H",
+        "cfiCode": "OPAXPS",
+        "securityType": "OPT",
+        "contractPeriodCode": "201501",
+        "maturityDate": "2014-12-26",
+        "strikePrice": 65.0,
+        "priceMultiplier": 10000.0,
+        "unitOfMeasure": "MMBtu",
+        "putCall": 0,
+        "productExchange": "NYMEX",
+        "priceQuoteCurrency": "USD"
+      },
+      "UnderlyingInstrument": [{
+        "underlyingProductCode": "NG",
+        "underlyingProductCodeSource": "H",
+        "underlyingSecurityType": "FUT",
+        "underlyingMaturity": "201501",
+        "underlyingProductExchange": "NYMEX"
+      }],
+      "ReportSide": {
+        "buySellCode": "1",
+        "clientOrderID": "6A8GE",
+        "inputSource": "GLBX",
+        "cti": 4,
+        "Parties": [{
+          "partyID": "090",
+          "partyRole": 1
+        }, {
+          "partyID": "020",
+          "partyRole": 4
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 7
+        }, {
+          "partyID": "0B0L",
+          "partyRole": 12
+        }, {
+          "partyID": "CME",
+          "partyRole": 21
+        }, {
+          "partyID": "NYMEX",
+          "partyRole": 22
+        }, {
+          "partyID": "COMPANY001",
+          "partyIDSource": "C",
+          "partyRole": 24,
+          "PartySubGroup": [{
+            "partyQualifierID": "1",
+            "partyQualifierType": 26
+          }]
+        }, {
+          "partyID": "A-123456",
+          "partyIDSource": "H",
+          "partyRole": 24
+        }, {
+          "partyID": "username",
+          "partyRole": 44
+        }, {
+          "partyID": "L83020",
+          "partyRole": 55
+        }],
+        "SideRegulatoryTradeIDGroup": [{
+          "sideRegulatoryTradeID": "FECC14B996E6EF2TP0102D77FC3C",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0
+        }],
+        "SideTradeRegulatoryTS": [{
+          "timestamp": "2015-02-19T10:53:37-06:00",
+          "timestampType": 1
+        }]
+      }
+    }
+  }, {
+    "type": "TradeCaptureReport",
+    "id": "14B996E6EF2TP0102D77FCDC110552295714B996E6EF2TP0102D77FCDC",
+    "attributes": {
+      "messageID": "14B996E6EF2TP0102D77FCDC1105522957",
+      "tradeID": "123504",
+      "secondaryTradeID": "14B996E6EF2TP0102D77FCDC",
+      "transactionType": 2,
+      "tradeReportType": 101,
+      "tradeStatus": 0,
+      "requestID": "your-company-name",
+      "tradeType": 0,
+      "tradeMatchID": "14B996E6EF2TP0102D77FCD8",
+      "executionID": "47950620150219105339TN0007734",
+      "priceType": 2,
+      "venueType": "E",
+      "tradeQuantity": 3.0,
+      "tradePrice": 1.200,
+      "tradeDate": "2015-02-19",
+      "clearDate": "2015-02-19",
+      "multiLegReportingType": "1",
+      "transactionTime": "2015-02-19T10:55:22-06:00",
+      "lastUpdateTime": "2015-02-19T10:55:22.957-06:00",
+      "Instrument": {
+        "productSymbol": "ONF5 P65000",
+        "productCode": "ON",
+        "productSourceCode": "H",
+        "cfiCode": "OPAXPS",
+        "securityType": "OPT",
+        "contractPeriodCode": "201501",
+        "maturityDate": "2014-12-26",
+        "strikePrice": 65.0,
+        "priceMultiplier": 10000.0,
+        "putCall": 0,
+        "unitOfMeasure": "MMBtu",
+        "productExchange": "NYMEX",
+        "priceQuoteCurrency": "USD"
+      },
+      "UnderlyingInstrument": [{
+        "underlyingProductCode": "NG",
+        "underlyingProductCodeSource": "H",
+        "underlyingSecurityType": "FUT",
+        "underlyingMaturity": "201501",
+        "underlyingProductExchange": "NYMEX"
+      }],
+      "ReportSide": {
+        "buySellCode": "1",
+        "clientOrderID": "6A8GE",
+        "inputSource": "GLBX",
+        "cti": 4,
+        "Parties": [{
+          "partyID": "090",
+          "partyRole": 1
+        }, {
+          "partyID": "020",
+          "partyRole": 4
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 7
+        }, {
+          "partyID": "0B0L",
+          "partyRole": 12
+        }, {
+          "partyID": "CME",
+          "partyRole": 21
+        }, {
+          "partyID": "NYMEX",
+          "partyRole": 22
+        }, {
+          "partyID": "COMPANY002",
+          "partyIDSource": "C",
+          "partyRole": 24,
+          "PartySubGroup": [{
+            "partyQualifierID": "1",
+            "partyQualifierType": 26
+          }]
+        }, {
+          "partyID": "A-56326",
+          "partyIDSource": "H",
+          "partyRole": 24
+        }, {
+          "partyID": "username",
+          "partyRole": 44
+        }, {
+          "partyID": "L83020",
+          "partyRole": 55
+        }],
+        "SideRegulatoryTradeIDGroup": [{
+          "sideRegulatoryTradeID": "FECC14B996E6EF2TP0102D77FCDC",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0
+        }],
+        "SideTradeRegulatoryTS": [{
+          "timestamp": "2015-02-19T10:53:37-06:00",
+          "timestampType": 1
+        }]
+      }
+    }
+  }, {
+    "type": "TradeCaptureReport",
+    "id": "14B996E6052TP0101D775606110552383914B996E6052TP0101D775606",
+    "attributes": {
+      "messageID": "14B996E6052TP0101D7756061105523839",
+      "tradeID": "123507",
+      "secondaryTradeID": "14B996E6052TP0101D775606",
+      "transactionType": 2,
+      "tradeReportType": 101,
+      "tradeStatus": 0,
+      "requestID": "your-company-name",
+      "tradeType": 0,
+      "tradeMatchID": "14B996E6052TP0101D775602",
+      "executionID": "47951620150219105339TN0007738",
+      "priceType": 2,
+      "venueType": "E",
+      "tradeQuantity": 1.0,
+      "tradePrice": 2.909,
+      "tradeDate": "2015-02-19",
+      "clearDate": "2015-02-19",
+      "multiLegReportingType": "1",
+      "transactionTime": "2015-02-19T10:55:23-06:00",
+      "lastUpdateTime": "2015-02-19T10:55:23.839-06:00",
+      "Instrument": {
+        "productSymbol": "ONF5 P65000",
+        "productCode": "ON",
+        "productSourceCode": "H",
+        "cfiCode": "OPAXPS",
+        "securityType": "OPT",
+        "contractPeriodCode": "201501",
+        "maturityDate": "2014-12-26",
+        "strikePrice": 65.0,
+        "priceMultiplier": 10000.0,
+        "unitOfMeasure": "MMBtu",
+        "putCall": 0,
+        "productExchange": "NYMEX",
+        "priceQuoteCurrency": "USD"
+      },
+      "UnderlyingInstrument": [{
+        "underlyingProductCode": "NG",
+        "underlyingProductCodeSource": "H",
+        "underlyingSecurityType": "FUT",
+        "underlyingMaturity": "201501",
+        "underlyingProductExchange": "NYMEX"
+      }],
+      "ReportSide": {
+        "buySellCode": "1",
+        "clientOrderID": "6A8GE",
+        "inputSource": "GLBX",
+        "cti": 4,
+        "Parties": [{
+          "partyID": "090",
+          "partyRole": 1
+        }, {
+          "partyID": "020",
+          "partyRole": 4
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 7
+        }, {
+          "partyID": "0B0L",
+          "partyRole": 12
+        }, {
+          "partyID": "CME",
+          "partyRole": 21
+        }, {
+          "partyID": "NYMEX",
+          "partyRole": 22
+        }, {
+          "partyID": "COMPANY001",
+          "partyIDSource": "C",
+          "partyRole": 24,
+          "PartySubGroup": [{
+            "partyQualifierID": "1",
+            "partyQualifierType": 26
+          }]
+        }, {
+          "partyID": "A-56326",
+          "partyIDSource": "H",
+          "partyRole": 24
+        }, {
+          "partyID": "username",
+          "partyRole": 44
+        }, {
+          "partyID": "L83020",
+          "partyRole": 55
+        }],
+        "SideRegulatoryTradeIDGroup": [{
+          "sideRegulatoryTradeID": "FECC14B996E6052TP0101D775606",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0
+        }],
+        "SideTradeRegulatoryTS": [{
+          "timestamp": "2015-02-19T10:53:37-06:00",
+          "timestampType": 1
+        }]
+      }
+    }
+  }],
+  "meta": {
+    "customApplicationVersion": "CME.0001",
+    "fixmlExtensionVersion": "109",
+    "schemaReleaseDate": "20090815",
+    "fixVersionNumber": "5.0 SP2"
+  }
+}

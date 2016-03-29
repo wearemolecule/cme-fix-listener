@@ -1,0 +1,108 @@
+{
+  "data": [{
+    "type": "TradeCaptureReport",
+    "id": "149A5C544C90003C104BC4100559979149A5C544C90003C104BC",
+    "attributes": {
+      "messageID": "149A5C544C90003C104BC4100559979",
+      "tradeID": "100145",
+      "secondaryTradeID": "149A5C544C90003C104BC",
+      "transactionType": 2,
+      "tradeReportType": 101,
+      "tradeStatus": 0,
+      "requestID": "ABC123",
+      "tradeType": 0,
+      "tradeSubType": 40,
+      "tradeMatchID": "149A5C544C90003C104B8",
+      "executionID": "1978631",
+      "priceType": 100,
+      "venueType": "X",
+      "tradeQuantity": 4.0,
+      "tradePrice": 4.195,
+      "tradeDate": "2014-11-13",
+      "clearDate": "2014-11-13",
+      "multiLegReportingType": "1",
+      "transactionTime": "2014-11-13T10:05:59-06:00",
+      "lastUpdateTime": "2014-11-13T10:05:59.979-06:00",
+      "Instrument": {
+        "productSymbol": "NGZ4",
+        "productCode": "NG",
+        "productSourceCode": "H",
+        "cfiCode": "FXXCSO",
+        "securityType": "FUT",
+        "contractPeriodCode": "201412",
+        "maturityDate": "2014-11-26",
+        "priceMultiplier": 10000.0,
+        "unitOfMeasure": "MMBtu",
+        "productExchange": "NYMEX",
+        "priceQuoteCurrency": "USD"
+      },
+      "ReportSide": {
+        "buySellCode": "2",
+        "clientOrderID": "C1978631",
+        "inputSource": "CPC",
+        "cti": 2,
+        "Parties": [{
+          "partyID": "123",
+          "partyRole": 1
+        }, {
+          "partyID": "123",
+          "partyRole": 4
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 7
+        }, {
+          "partyID": "CME",
+          "partyRole": 21
+        }, {
+          "partyID": "NYMEX",
+          "partyRole": 22
+        }, {
+          "partyID": "COMPANY001",
+          "partyIDSource": "C",
+          "partyRole": 24,
+          "PartySubGroup": [{
+            "partyQualifierID": "1",
+            "partyQualifierType": 26
+          }]
+        }, {
+          "partyID": "A-123456",
+          "partyIDSource": "H",
+          "partyRole": 24
+        }, {
+          "partyID": "your-company-name",
+          "partyRole": 30
+        }, {
+          "partyID": "username",
+          "partyRole": 36,
+          "PartySubGroup": [{
+            "partyQualifierID": "Other User",
+            "partyQualifierType": 9
+          }]
+        }, {
+          "partyID": "USERNAME",
+          "partyRole": 62,
+          "PartySubGroup": [{
+            "partyQualifierID": "FULL NAME",
+            "partyQualifierType": 9
+          }]
+        }],
+        "SideRegulatoryTradeIDGroup": [{
+          "sideRegulatoryTradeID": "CPC000001978631BN0001",
+          "sideRegulatoryTradeSource": "1010000023",
+          "sideRegulatoryTradeEvent": 2,
+          "sideRegulatoryTradeType": 0
+        }],
+        "SideTradeRegulatoryTS": [{
+          "timestamp": "2014-11-13T10:04:00-06:00",
+          "timestampType": 1
+        }]
+      }
+    }
+  }],
+  "meta": {
+    "customApplicationVersion": "CME.0001",
+    "fixmlExtensionVersion": "109",
+    "schemaReleaseDate": "20090815",
+    "fixVersionNumber": "5.0 SP2"
+  }
+}

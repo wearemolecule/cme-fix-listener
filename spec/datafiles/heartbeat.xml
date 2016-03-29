@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FIXML s="20090815" cv="CME.0001" xv="109" v="5.0 SP2">
+  <Batch>
+    <Hdr TSub="YOUR_CME_STP_API_USERNAME" SSub="STP" TID="COMPANY_NAME" SID="CME"></Hdr>
+  </Batch>
+</FIXML>
