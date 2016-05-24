@@ -1,5 +1,5 @@
-ruby_version: ruby-2.3.0
-bundler_version: 1.11.2
+ruby_version: ruby-2.3.1
+bundler_version: 1.12.4
 test_pattern:
   - spec/**/*_spec.rb
 environment:

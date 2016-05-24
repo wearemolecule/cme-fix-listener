@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'thor'
 gem 'celluloid'
@@ -16,7 +16,6 @@ gem 'rake', '~> 10.5'
 
 group :test do
   gem 'rspec'
-  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :development, :test do
