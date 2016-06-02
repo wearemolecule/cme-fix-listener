@@ -24,7 +24,7 @@ module CmeFixListener
       end.to_xml
     end
 
-    private
+    protected
 
     def fixml_attrs
       {

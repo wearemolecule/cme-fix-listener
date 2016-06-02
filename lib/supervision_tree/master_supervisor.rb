@@ -17,6 +17,9 @@ module SupervisionTree
       master_container.add(configuration(SupervisionTree::AccountsMasterFetchActor,
                                          :accounts_master_fetch_actor,
                                          master_container))
+      master_container.add(configuration(SupervisionTree::HistoryRequestActor,
+                                         :history_request_actor,
+                                         master_container))
     end
 
     def self.configuration(group, name, container)
