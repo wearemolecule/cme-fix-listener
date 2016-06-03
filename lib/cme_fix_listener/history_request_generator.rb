@@ -9,6 +9,7 @@ module CmeFixListener
     end
 
     def build_xml(request_type)
+      return if @start_time.blank? || @end_time.blank?
       Nokogiri::XML::Builder.new do |xml|
         xml.FIXML(fixml_attrs) do
           xml.TrdCaptRptReq(

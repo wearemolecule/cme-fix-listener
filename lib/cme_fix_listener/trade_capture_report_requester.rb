@@ -38,6 +38,7 @@ module CmeFixListener
     end
 
     def post_http_request(body, header)
+      return if body.blank?
       HTTParty.post(cme_url, base_options.merge(body: body, headers: header))
     end
 

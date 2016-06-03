@@ -4,9 +4,10 @@ describe SupervisionTree::AccountsMasterFetchActor do
   let(:klass) { described_class }
   let(:instance) { klass.new(dubbed_parent) }
   let(:dubbed_parent) { double(Celluloid::Supervision::Container) }
+  let(:double_obj) { double(fire: nil) }
 
   it 'should call speak on init' do
-    allow_any_instance_of(klass).to receive(:every).and_yield
+    expect_any_instance_of(klass).to receive(:every).and_yield.and_return(double_obj)
     expect_any_instance_of(klass).to receive(:fetch_and_set_accounts).once
     instance
   end

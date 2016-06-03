@@ -1,6 +1,9 @@
+class BadHistoryRequestError < StandardError; end
+
 module SupervisionTree
   class HistoryRequestActor
     include Celluloid
+    include ErrorNotifierMethods
 
     def initialize(_parent_containter)
       puts 'Creating HistoryRequestActor'
@@ -15,7 +18,8 @@ module SupervisionTree
       every(timeout) do
         request_info = fetch_request_info_from_redis
         if request_info.present?
-          request_history_from_cme(request_info)
+          parsed_request = parse_request(request_info)
+          request_history_from_cme(parsed_request) if parsed_request.present?
         end
       end.fire
     end
@@ -25,35 +29,45 @@ module SupervisionTree
     end
 
     def request_history_from_cme(request_info)
-          puts 'Found Request!!!!!'
-      puts request_info
-      puts request_info['account_id']
       account_details = AccountFetcher.fetch_details_for_account_id(request_info['account_id'])
-      puts 'Account Dets!!!!!'
-      puts account_details
-      return
       start_time = request_info['start_time']
       end_time = request_info['end_time']
 
-      @requester = CmeFixListener::HistoryTradeCaptureReportRequester.new(account_details, start_time, end_time)
-      @response_handler = CmeFixListener::HistoryResponseHandler.new(account_details)
-      history_request_loop
+      requester = CmeFixListener::HistoryTradeCaptureReportRequester.new(account_details, start_time, end_time)
+      response_handler = CmeFixListener::HistoryResponseHandler.new(account_details)
+      history_request_loop(requester, response_handler)
     end
 
-    def history_request_loop(token = nil)
-      response = send_request(token)
-      @response_handler.handle_cme_response(response)
-      if !@response_handler.experiencing_problems? && @response_handler.token.present?
-        history_request_loop(@response_handler.token)
+    def history_request_loop(requester, handler, token = nil)
+      response = send_request(requester, token)
+      handler.handle_cme_response(response)
+      if !handler.experiencing_problems? && handler.token.present?
+        history_request_loop(requester, handler, handler.token)
       end
     end
 
-    def send_request(token)
+    def send_request(requester, token)
       if token.present?
-        @requester.existing_client_request(token)
+        requester.try(:existing_client_request, token)
       else
-        @requester.new_client_request(nil)
+        requester.try(:new_client_request, nil)
       end
+    end
+
+    def parse_request(request)
+      json_request = JSON.parse(request)
+      if json_request['account_id'].blank?
+        raise BadHistoryRequestError.new("Request must include an account id, start time, and end time.")
+      end
+      json_request['start_time'] = parse_time(json_request['start_time'], default: Time.at(Time.now.to_i - 86400))
+      json_request['end_time'] = parse_time(json_request['end_time'], default: Time.now)
+      json_request
+    rescue StandardError => e
+      notify_admins_of_error(e, e.message, { request: request, parsed_json: json_request })
+    end
+
+    def parse_time(date, default:)
+      Time.parse(date, default).iso8601
     end
 
     def timeout
