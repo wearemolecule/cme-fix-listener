@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Given a queue name, class name, and object it will add the queue to redis,
   # and then publish the object to the given class name (within the queue).

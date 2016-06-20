@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # The TradeCaptureReportParser is responsible for the <TrdCaptRpt> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -5,8 +6,9 @@
 #
 # <TrdCaptRpt LastUpdateTm="2015-02-19T10:55:22.575-06:00" TxnTm="2015-02-19T10:55:22-06:00" MLegRptTyp="1"
 # BizDt="2015-02-19" TrdDt="2015-02-19" LastPx="3.450" LastQty="2" VenuTyp="E" PxTyp="2"
-# ExecID="47949520150219105337TN0007733" MtchID="14B996E6EF2TP0102D77FC3A" TrdTyp="0" ReqID="your-company-name" TrdRptStat="0"
-# RptTyp="101" TransTyp="2" TrdID2="14B996E6EF2TP0102D77FC3C" TrdID="123503" RptID="14B996E6EF2TP0102D77FC3C1105522575">
+# ExecID="47949520150219105337TN0007733" MtchID="14B996E6EF2TP0102D77FC3A" TrdTyp="0" ReqID="your-company-name"
+# TrdRptStat="0" RptTyp="101" TransTyp="2" TrdID2="14B996E6EF2TP0102D77FC3C" TrdID="123503"
+# RptID="14B996E6EF2TP0102D77FC3C1105522575">
 #
 
 module CmeFixListener

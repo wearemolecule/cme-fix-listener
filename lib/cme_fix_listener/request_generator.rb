@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Builds a valid trade capture report request xml message required by CME.
   class RequestGenerator

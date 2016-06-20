@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SupervisionTree
   # Active CME Account fetch celluloid actor
   # Every 10 seconds this actor will call the AccountFetcher to fetch all active CME accounts.
@@ -44,7 +45,7 @@ module SupervisionTree
     # rewritting the supervision-tree, a very long timeout will basically acheive the same thing.
     def timeout
       if ENV['FETCH_ACCOUNT_FROM_CONFIG']
-        10000
+        10_000
       else
         10
       end

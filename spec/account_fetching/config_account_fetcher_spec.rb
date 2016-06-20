@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe HttpAccountFetcher do
@@ -6,11 +7,11 @@ describe HttpAccountFetcher do
 
   before do
     expect(HTTParty).to receive(:get).with(host).and_return(json_message)
-    ENV['ACCOUNT_HTTP_HOST'] = "http://account-service:8080"
+    ENV['ACCOUNT_HTTP_HOST'] = 'http://account-service:8080'
   end
 
   describe '.fetch_details_for_account_id' do
-    let(:host) { "http://account-service:8080/account/#{account['id']}/cme_details"}
+    let(:host) { "http://account-service:8080/account/#{account['id']}/cme_details" }
 
     subject { klass.fetch_details_for_account_id(account['id']) }
 
@@ -18,15 +19,15 @@ describe HttpAccountFetcher do
       let(:json_message) do
         double(body:
         {
-          "id": 123,
-          "name": "Account1",
-          "cmeIntegrationActive": true,
-          "cmeUsername": "username",
-          "cmePassword": "password",
-          "cmeEnvironment": "Testing",
-          "cmeFirmSid": "your-company-name",
-          "cmePartyRole": "7",
-          "cmeRequestID": "your-company-name"
+          'id' => 123,
+          'name' => 'Account1',
+          'cmeIntegrationActive' => true,
+          'cmeUsername' => 'username',
+          'cmePassword' => 'password',
+          'cmeEnvironment' => 'Testing',
+          'cmeFirmSid' => 'your-company-name',
+          'cmePartyRole' => '7',
+          'cmeRequestID' => 'your-company-name'
         }.to_json)
       end
 
@@ -41,7 +42,7 @@ describe HttpAccountFetcher do
   end
 
   describe '.fetch_active_accounts' do
-    let(:host) { "http://account-service:8080/accounts?cmeIntegrationActive=true" }
+    let(:host) { 'http://account-service:8080/accounts?cmeIntegrationActive=true' }
 
     subject { klass.fetch_active_accounts }
 
@@ -50,28 +51,28 @@ describe HttpAccountFetcher do
         double(body:
                [
                  {
-                   "id": 123,
-                   "name": "Account1",
-                   "cmeIntegrationActive": true,
-                   "cmeUsername": "username",
-                   "cmePassword": "password",
-                   "cmeEnvironment": "Testing",
-                   "cmeFirmSid": "your-company-name",
-                   "cmePartyRole": "7",
-                   "cmeRequestID": "your-company-name"
+                   'id' => 123,
+                   'name' => 'Account1',
+                   'cmeIntegrationActive' => true,
+                   'cmeUsername' => 'username',
+                   'cmePassword' => 'password',
+                   'cmeEnvironment' => 'Testing',
+                   'cmeFirmSid' => 'your-company-name',
+                   'cmePartyRole' => '7',
+                   'cmeRequestID' => 'your-company-name'
                  },
                  {
-                   "id": "account2_id",
-                   "name": "account2_name",
-                   "cmeIntegrationActive": true,
-                   "cmeUsername": "username",
-                   "cmePassword": "password",
-                   "cmeEnvironment": "Testing",
-                   "cmeFirmSid": "your-company-name",
-                   "cmePartyRole": "7",
-                   "cmeRequestID": "your-company-name"
+                   'id' => 'account2_id',
+                   'name' => 'account2_name',
+                   'cmeIntegrationActive' => true,
+                   'cmeUsername' => 'username',
+                   'cmePassword' => 'password',
+                   'cmeEnvironment' => 'Testing',
+                   'cmeFirmSid' => 'your-company-name',
+                   'cmePartyRole' => '7',
+                   'cmeRequestID' => 'your-company-name'
                  }
-        ].to_json)
+               ].to_json)
       end
 
       it { expect(subject).to eq json_message.body }

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # The LegInstrumentParser is responsible for the <Leg> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #

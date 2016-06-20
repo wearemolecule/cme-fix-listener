@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe AccountFetcher do
@@ -11,13 +12,19 @@ describe AccountFetcher do
     subject { klass.fetch_details_for_account_id(id) }
 
     context 'using a config file fetcher' do
-      before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = "true" }
-      it { expect(config_klass).to receive(:fetch_details_for_account_id).with(id).and_return(nil); subject }
+      before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = 'true' }
+      it do
+        expect(config_klass).to receive(:fetch_details_for_account_id).with(id).and_return(nil)
+        subject
+      end
     end
 
     context 'using a http fetcher' do
       before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = nil }
-      it { expect(http_klass).to receive(:fetch_details_for_account_id).with(id).and_return(nil); subject }
+      it do
+        expect(http_klass).to receive(:fetch_details_for_account_id).with(id).and_return(nil)
+        subject
+      end
     end
   end
 
@@ -25,13 +32,19 @@ describe AccountFetcher do
     subject { klass.fetch_active_accounts }
 
     context 'using a config file fetcher' do
-      before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = "true" }
-      it { expect(config_klass).to receive(:fetch_active_accounts).and_return(nil); subject }
+      before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = 'true' }
+      it do
+        expect(config_klass).to receive(:fetch_active_accounts).and_return(nil)
+        subject
+      end
     end
 
     context 'using a HTTP fetcher' do
       before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = nil }
-      it { expect(http_klass).to receive(:fetch_active_accounts).and_return(nil); subject }
+      it do
+        expect(http_klass).to receive(:fetch_active_accounts).and_return(nil)
+        subject
+      end
     end
   end
 
@@ -55,7 +68,7 @@ describe AccountFetcher do
     subject { klass.account_fetcher_klass }
 
     context 'using a config fetcher' do
-      before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = "true" }
+      before { ENV['FETCH_ACCOUNT_FROM_CONFIG'] = 'true' }
       it { expect(subject).to eq config_klass }
     end
 

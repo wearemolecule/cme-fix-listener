@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe SupervisionTree::HistoryRequestActor do
@@ -19,7 +20,7 @@ describe SupervisionTree::HistoryRequestActor do
     before { allow_any_instance_of(klass).to receive(:speak!).and_return(nil) }
 
     context 'when polling env var is set' do
-      before { ENV['HISTORY_POLLING_INTERVAL_IN_SECONDS'] = "10" }
+      before { ENV['HISTORY_POLLING_INTERVAL_IN_SECONDS'] = '10' }
 
       it 'it should run every env var interval' do
         expect_any_instance_of(klass).to receive(:every).with(10).and_yield.and_return(double_obj)
@@ -29,7 +30,7 @@ describe SupervisionTree::HistoryRequestActor do
     end
 
     context 'when polling env var is not set' do
-      before { ENV['HISTORY_POLLING_INTERVAL_IN_SECONDS'] = "" }
+      before { ENV['HISTORY_POLLING_INTERVAL_IN_SECONDS'] = '' }
 
       it 'it should run every 300 seconds' do
         expect_any_instance_of(klass).to receive(:every).with(300).and_yield.and_return(double_obj)
@@ -51,8 +52,8 @@ describe SupervisionTree::HistoryRequestActor do
     context 'when the parsed request is blank' do
       it 'should not attempt to request history from cme' do
         expect_any_instance_of(klass).to receive(:every).with(300).and_yield.and_return(double_obj)
-        expect_any_instance_of(klass).to receive(:fetch_request_info_from_redis).and_return("bad-request")
-        expect_any_instance_of(klass).to receive(:parse_request).with("bad-request").and_return(nil)
+        expect_any_instance_of(klass).to receive(:fetch_request_info_from_redis).and_return('bad-request')
+        expect_any_instance_of(klass).to receive(:parse_request).with('bad-request').and_return(nil)
         expect_any_instance_of(klass).not_to receive(:request_history_from_cme)
         subject
       end
@@ -62,7 +63,7 @@ describe SupervisionTree::HistoryRequestActor do
   describe '#history_request_loop' do
     let(:requester) { history_request_klass.new({}, nil, nil) }
     let(:handler) { history_handler_klass.new({}) }
-    let(:response) { "cme-message-response" }
+    let(:response) { 'cme-message-response' }
 
     subject { instance.history_request_loop(requester, handler) }
 
@@ -94,7 +95,7 @@ describe SupervisionTree::HistoryRequestActor do
       it 'should call history_request_loop twice' do
         expect_any_instance_of(history_handler_klass).to receive(:handle_cme_response).with(response).twice
         expect_any_instance_of(history_handler_klass).to receive(:experiencing_problems?).and_return(false, false)
-        allow_any_instance_of(history_handler_klass).to receive(:token).and_return("token", nil)
+        allow_any_instance_of(history_handler_klass).to receive(:token).and_return('token', nil)
         expect_any_instance_of(klass).to receive(:history_request_loop).twice.and_call_original
         subject
       end
@@ -107,7 +108,7 @@ describe SupervisionTree::HistoryRequestActor do
     subject { instance.send_request(requester, token) }
 
     context 'when the token is present' do
-      let(:token) { "token-123" }
+      let(:token) { 'token-123' }
 
       it 'should make an existing_client_request' do
         expect_any_instance_of(history_request_klass).to receive(:existing_client_request).with(token)
@@ -116,7 +117,7 @@ describe SupervisionTree::HistoryRequestActor do
     end
 
     context 'when the token is not present' do
-      let(:token) { "" }
+      let(:token) { '' }
 
       it 'should make an existing_client_request' do
         expect_any_instance_of(history_request_klass).to receive(:new_client_request).with(nil)
@@ -126,8 +127,6 @@ describe SupervisionTree::HistoryRequestActor do
   end
 
   describe '#parse_request' do
-    let(:request) { nil }
-
     subject { instance.parse_request(request) }
 
     context 'a good request' do
@@ -136,7 +135,7 @@ describe SupervisionTree::HistoryRequestActor do
       let(:request) { { account_id: 1, start_time: start_time, end_time: end_time }.to_json }
 
       it 'should return a hash with the account_id and iso8601 date strings' do
-        request = subject
+        subject
         expect(subject['account_id']).to eq 1
         expect(subject['start_time']).to eq start_time.iso8601
         expect(subject['end_time']).to eq end_time.iso8601
@@ -144,9 +143,9 @@ describe SupervisionTree::HistoryRequestActor do
     end
 
     context 'a request that cant be parsed into json' do
-      let(:request) { "not-json" }
+      let(:request) { 'not-json' }
 
-      it "should notify honeybadger and return nil" do
+      it 'should notify honeybadger and return nil' do
         expect_any_instance_of(klass).to receive(:notify_admins_of_error)
         expect(subject).to eq nil
       end

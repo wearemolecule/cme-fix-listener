@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 require 'redis_test_helpers'
 
@@ -43,7 +44,6 @@ describe CmeFixListener::HeartbeatManager do
       end
     end
   end
-
 
   describe '.key_name' do
     subject { klass.key_name(account['id']) }

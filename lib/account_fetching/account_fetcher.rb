@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Fetches account information.
 # Given an env var "FETCH_ACCOUNT_FROM_CONFIG" it will decided to fetch account details from an
 # HTTP endpoint or from a config file. It will then call out to the correct fetchers and return parsed JSON

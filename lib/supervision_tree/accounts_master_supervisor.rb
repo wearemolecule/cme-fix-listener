@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SupervisionTree
   # Accounts Master celluloid supervisor.
   # This supervisor monitors active CME accounts. For every active CME account this will create an AccountSupervisor.

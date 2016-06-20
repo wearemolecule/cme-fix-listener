@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe CmeFixListener::HistoryRequestGenerator do
@@ -24,12 +25,12 @@ describe CmeFixListener::HistoryRequestGenerator do
 
     it { expect(instance.build_xml('1')).to eq message_spec_xml }
 
-    context "when start time is blank" do
+    context 'when start time is blank' do
       let(:instance) { klass.new(account, '', 'test') }
       it { expect(instance.build_xml('1')).to eq nil }
     end
 
-    context "when end time is blank" do
+    context 'when end time is blank' do
       let(:instance) { klass.new(account, 'test', nil) }
       it { expect(instance.build_xml('1')).to eq nil }
     end

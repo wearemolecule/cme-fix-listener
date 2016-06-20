@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # FIXML -> Hash Parser
   # Given a 5.0 SP2 FIXML message calling `parse_fixml` will create a Hash representation of the message.

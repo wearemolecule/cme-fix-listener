@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Fetches account information.
 # Given a host name (found in ENV) it has the ability to perform a GET request to to retrieve all CME
 # active accounts or cme details of an account, given an id.

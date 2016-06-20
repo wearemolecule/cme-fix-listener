@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Make HTTP requests to CME.
   # Given the username, password, and url from the account it will POST to CME with the correct header and body.

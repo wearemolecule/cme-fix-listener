@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 module SupervisionTree
   # Account detail fetching celluloid actor.
-  # Every 10 (or 1000 if reading from a config file) seconds this actor will call the AccountFetcher to fetch account details
-  # for its given account (passed in during initalization). The data is then put on the CmeFixListenerActor.
+  # Every 10 (or 1000 if reading from a config file) seconds this actor will call the AccountFetcher to fetch account
+  # details for its given account (passed in during initalization). The data is then put on the CmeFixListenerActor.
   class AccountFetchActor
     include Celluloid
     include ::ErrorNotifierMethods
@@ -45,7 +46,7 @@ module SupervisionTree
     # rewritting the supervision-tree, a very long timeout will basically acheive the same thing.
     def timeout
       if ENV['FETCH_ACCOUNT_FROM_CONFIG'].present?
-        10000
+        10_000
       else
         10
       end
