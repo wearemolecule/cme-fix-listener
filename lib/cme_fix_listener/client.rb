@@ -33,12 +33,10 @@ module CmeFixListener
     end
 
     def new_client_request
-      puts 'Attempting to Authenticate with CME as a new subscription'
       send_request(:new_client_request)
     end
 
     def existing_client_request(token)
-      puts 'Attempting to Authenticate with CME as a continued subscription'
       send_request(:existing_client_request, token)
     end
 

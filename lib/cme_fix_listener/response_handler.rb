@@ -50,7 +50,6 @@ module CmeFixListener
     def parse_body(body)
       parser = CmeFixListener::FixmlParser.new(body)
       return handle_error(parser, body) if body_has_errors?(parser)
-      puts raw_body_message(body)
       parser.parse_fixml
     end
 
