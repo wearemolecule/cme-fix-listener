@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Helper methods used to notify us of errors
 module ErrorNotifierMethods
   def notify_admins_of_error(error, error_message, error_context)

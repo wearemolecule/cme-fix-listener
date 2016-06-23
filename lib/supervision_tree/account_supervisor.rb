@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SupervisionTree
   # Account celluloid supervisor.
   # This supervisor creates and monitors two actors, CmeLooperActor and AccountFetchActor.

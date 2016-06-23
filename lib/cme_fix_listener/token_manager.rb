@@ -1,7 +1,7 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Creates and adds a list, on redis, named 'cme-token-#{account_id}' for each active account id.
   class TokenManager < RedisManager
-
     def self.last_token_for_account(account_id)
       catch_errors('pop') do
         Resque.redis.rpop(key_name(account_id))

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Used to determine if we can make requests to CME. Every day the CME API will go into a "maintaince mode".
   # At that point we should not make any requests to their API.

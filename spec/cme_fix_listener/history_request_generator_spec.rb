@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-describe CmeFixListener::RequestGenerator do
+describe CmeFixListener::HistoryRequestGenerator do
   let(:klass) { described_class }
-  let(:instance) { klass.new(account) }
+  let(:instance) { klass.new(account, '2016-01-01', '2016-01-02') }
   let(:content_type) { 'text/xml' }
 
   let(:account) do
@@ -21,15 +21,18 @@ describe CmeFixListener::RequestGenerator do
   describe '#build_xml' do
     let(:message_spec) { file.read }
     let(:message_spec_xml) { (Nokogiri::XML message_spec).to_xml }
+    let(:file_name) { 'history_request.xml' }
 
-    context 'initial subscription' do
-      let(:file_name) { 'trading_firm_initial_subscription.xml' }
-      it { expect(instance.build_xml('1')).to eq message_spec_xml }
+    it { expect(instance.build_xml('1')).to eq message_spec_xml }
+
+    context 'when start time is blank' do
+      let(:instance) { klass.new(account, '', 'test') }
+      it { expect(instance.build_xml('1')).to eq nil }
     end
 
-    context 'continued subscription' do
-      let(:file_name) { 'trading_firm_continued_subscription.xml' }
-      it { expect(instance.build_xml('3')).to eq message_spec_xml }
+    context 'when end time is blank' do
+      let(:instance) { klass.new(account, 'test', nil) }
+      it { expect(instance.build_xml('1')).to eq nil }
     end
   end
 end

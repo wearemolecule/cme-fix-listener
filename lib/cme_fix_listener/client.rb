@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Initiates request to CME and pushes the response along.
   # This class will tell TradeCaptureReportRequest either make a new or continued request to CME,
@@ -12,10 +13,9 @@ module CmeFixListener
     end
 
     def establish_session!
-      unless @response_handler.experiencing_problems?
-        make_request!
-        log_heartbeat
-      end
+      return if @response_handler.experiencing_problems?
+      make_request!
+      log_heartbeat
     end
 
     def make_request!

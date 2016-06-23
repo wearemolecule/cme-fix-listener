@@ -1,6 +1,10 @@
+# frozen_string_literal: true
 require 'spec_helper'
+require 'redis_test_helpers'
 
 describe CmeFixListener::TokenManager do
+  include RedisTestHelpers
+
   let(:klass) { described_class }
   let(:account) { { 'id' => 123 } }
 
@@ -41,14 +45,5 @@ describe CmeFixListener::TokenManager do
     subject { klass.key_name(account['id']) }
 
     it { expect(subject).to eq 'cme-token-123' }
-  end
-
-  def raise_redis_connection_error(method)
-    expect(Resque.redis).to receive(method).and_raise(Redis::CannotConnectError)
-  end
-
-  def expect_errors_and_notify_honeybadger
-    expect(Honeybadger).to receive(:notify)
-    expect(subject[:errors].present?).to eq true
   end
 end

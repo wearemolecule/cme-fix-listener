@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # The TradeLegParser is responsible for the <TrdLeg> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #

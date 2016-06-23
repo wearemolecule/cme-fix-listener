@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CmeFixListener
   # Make HTTP requests to CME.
   # Given the username, password, and url from the account it will POST to CME with the correct header and body.
@@ -38,6 +39,7 @@ module CmeFixListener
     end
 
     def post_http_request(body, header)
+      return if body.blank?
       HTTParty.post(cme_url, base_options.merge(body: body, headers: header))
     end
 

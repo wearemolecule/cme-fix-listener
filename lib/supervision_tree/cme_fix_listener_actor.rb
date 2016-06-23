@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class BadAccountDataFetched < StandardError; end
 
 module SupervisionTree
