@@ -79,7 +79,6 @@ describe CmeFixListener::ResponseHandler do
 
       it 'should short circuit' do
         expect_any_instance_of(parser_klass).not_to receive(:parse_fixml).and_return('return')
-        expect(instance).not_to receive(:raw_body_message)
         expect(subject).to eq nil
       end
     end
@@ -89,7 +88,6 @@ describe CmeFixListener::ResponseHandler do
 
       it 'should short circuit' do
         expect_any_instance_of(parser_klass).to receive(:parse_fixml).and_return('return')
-        expect(instance).to receive(:raw_body_message).with('body')
         expect(subject).to eq 'return'
       end
     end

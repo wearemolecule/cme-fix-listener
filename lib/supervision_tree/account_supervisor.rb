@@ -4,6 +4,7 @@ module SupervisionTree
   # This supervisor creates and monitors two actors, CmeLooperActor and AccountFetchActor.
   class AccountSupervisor
     include Celluloid
+    include ::Logging
 
     attr_accessor :account_id, :container
 
@@ -13,7 +14,7 @@ module SupervisionTree
     end
 
     def create
-      puts "Creating AccountSupervisor for account id: #{@account_id}"
+      Logging.logger.info { "Creating AccountSupervisor for account id: #{@account_id}" }
       @container = Celluloid::Supervision::Container.run!
       @container.add(configuration(SupervisionTree::CmeFixListenerActor,
                                    actor_name(SupervisionTree::CmeFixListenerActor)))
@@ -23,7 +24,7 @@ module SupervisionTree
 
     # Called before this Actor is terminated. Termination does not do any cleanup so it should terminate its own actors.
     def destroy!
-      puts "Destroying AccountSupervisor for account id: #{@account_id}"
+      Logging.logger.info { "Destroying AccountSupervisor for account id: #{@account_id}" }
       @container.remove(actor_name(SupervisionTree::CmeFixListenerActor))
       @container.remove(actor_name(SupervisionTree::AccountFetchActor))
     end

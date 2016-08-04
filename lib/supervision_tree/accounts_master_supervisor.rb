@@ -7,11 +7,12 @@ module SupervisionTree
   # been turned off.
   class AccountsMasterSupervisor
     include Celluloid
+    include ::Logging
 
     attr_accessor :active_account_ids, :accounts_master_container
 
     def initialize(_parent_container)
-      puts 'Creating AccountsMasterSupervisor'
+      Logging.logger.info('Creating AccountsMasterSupervisor')
       @active_account_ids = []
       @accounts_master_container = Celluloid::Supervision::Container.run!
     end
@@ -21,6 +22,8 @@ module SupervisionTree
     # Sets the active cme accounts from the AccountsFetchActor.
     def set_active_accounts(active_accounts)
       new_account_ids, deleted_account_ids = account_ids_diff(active_accounts)
+      Logging.logger.debug { "Found new accounts: #{new_account_ids}" }
+      Logging.logger.debug { "Found deleted accounts: #{deleted_account_ids}" }
       create_secondary_supervisors(new_account_ids)
       remove_secondary_supervisors(deleted_account_ids)
     end

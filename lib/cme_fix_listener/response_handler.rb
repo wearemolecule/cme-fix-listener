@@ -9,11 +9,12 @@ module CmeFixListener
   # the TokenManager.
   class ResponseHandler
     include ErrorNotifierMethods
+    include Logging
 
     attr_accessor :account, :account_id, :invalid_credentials, :token
 
     def initialize(account)
-      puts "Creating ResponseHandler for #{account['id']}"
+      Logging.logger.info { "Creating ResponseHandler for #{account['id']}" }
       @account = account
       @account_id = account['id']
       @body_has_errors = false
@@ -50,6 +51,7 @@ module CmeFixListener
     def parse_body(body)
       parser = CmeFixListener::FixmlParser.new(body)
       return handle_error(parser, body) if body_has_errors?(parser)
+      Logging.logger.debug { raw_body_message(body) }
       parser.parse_fixml
     end
 
@@ -76,11 +78,13 @@ module CmeFixListener
     end
 
     def full_error_message(error_text, body)
-      puts printf(%(
-        Error Estimation: %s
-        - Account: %s
-        - Body: %s
-      ), estimate_error_message(error_text), @account, body)
+      Logging.logger.error do
+        printf(%(
+          Error Estimation: %s
+          - Account: %s
+          - Body: %s
+        ), estimate_error_message(error_text), @account, body)
+      end
     end
 
     def estimate_error_message(error_txt)

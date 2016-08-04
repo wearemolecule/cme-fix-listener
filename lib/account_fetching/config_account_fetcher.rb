@@ -3,6 +3,8 @@
 # Given account details in a config file (config/account-config.json) it will read and parse the information.
 # All accounts in the account-config.json are considered "active".
 class ConfigAccountFetcher < AccountFetcher
+  include ::Logging
+
   def self.fetch_details_for_account_id(account_id)
     config = read_config_file(config_file_path)
     config_object = parse_json(config, [])
@@ -14,9 +16,9 @@ class ConfigAccountFetcher < AccountFetcher
   end
 
   def self.read_config_file(config_path)
-    @data ||= File.read(config_path)
+    File.read(config_path)
   rescue StandardError
-    puts "Unable to read config file: #{config_path}\n"
+    Logging.logger.error { "Unable to read config file: #{config_path}\n" }
     nil
   end
 
