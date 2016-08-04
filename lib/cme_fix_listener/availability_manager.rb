@@ -47,13 +47,13 @@ module CmeFixListener
     def self.start_of_maintenance_window
       ActiveSupport::TimeZone.new(time_zone).local(@current_time.year,
                                                    @current_time.month,
-                                                   @current_time.day, 16, 15, 00)
+                                                   @current_time.day, 16, 15, 0o0)
     end
 
     def self.end_of_maintenance_window
       ActiveSupport::TimeZone.new(time_zone).local(@current_time.year,
                                                    @current_time.month,
-                                                   @current_time.day, 17, 00, 00)
+                                                   @current_time.day, 17, 0o0, 0o0)
     end
 
     def self.time_zone

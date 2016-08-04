@@ -10,7 +10,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'wednesday not between 4:15pm and 5:00pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 07, 16, 14, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o7, 16, 14, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq true }
@@ -18,7 +18,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'wednesday between 4:15pm and 5:00pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 07, 16, 16, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o7, 16, 16, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq false }
@@ -26,7 +26,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'saturday not between 4:15pm and 5:00pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 03, 16, 14, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o3, 16, 14, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq false }
@@ -34,7 +34,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'sunday after 5:00pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 04, 17, 01, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o4, 17, 0o1, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq true }
@@ -42,7 +42,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'sunday before 5:00pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 04, 16, 59, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o4, 16, 59, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq false }
@@ -50,7 +50,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'friday before 4:15pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 02, 16, 14, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o2, 16, 14, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq true }
@@ -58,7 +58,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'friday after 4:15pm local time' do
       let(:current_time) do
-        Time.new(2015, 01, 02, 16, 16, 00).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o2, 16, 16, 0o0).in_time_zone(zone)
       end
 
       it { expect(subject).to eq false }
@@ -66,7 +66,7 @@ describe CmeFixListener::AvailabilityManager do
 
     context 'saturday' do
       let(:current_time) do
-        Time.new(2015, 01, 03).in_time_zone(zone)
+        Time.new(2015, 0o1, 0o3).in_time_zone(zone)
       end
 
       it { expect(subject).to eq false }

@@ -21,13 +21,10 @@ class HttpAccountFetcher < AccountFetcher
     retries ||= 0
     yield
   rescue Errno::ECONNRESET => e
-    if (retries += 1) < 3
-      sleep_before_retry(30)
-      Logging.logger.error { "Unable to fetch account details for #{account_id}, error: #{e.message}" }
-      retry
-    else
-      raise e
-    end
+    raise e unless (retries += 1) < 3
+    Logging.logger.error { "Unable to fetch account details for #{account_id}, error: #{e.message}" }
+    sleep_before_retry(30)
+    retry
   end
 
   def self.sleep_before_retry(nsecs)
