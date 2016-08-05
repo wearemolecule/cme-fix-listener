@@ -14,8 +14,7 @@ module CmeFixListener
       return if @start_time.blank? || @end_time.blank?
       Nokogiri::XML::Builder.new do |xml|
         xml.FIXML(fixml_attrs) do
-          xml.TrdCaptRptReq(
-            trd_cpt_rpt_request_attrs(request_type).merge(history_params)) do
+          xml.TrdCaptRptReq(trd_cpt_rpt_request_attrs(request_type).merge(history_params)) do
             xml.Hdr(header_attrs)
             xml.Pty(party_attrs)
           end

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 # Helper methods used to notify us of errors
 module ErrorNotifierMethods
+  include Logging
+
   def notify_admins_of_error(error, error_message, error_context)
     Honeybadger.notify(error_class: error, error_message: error_message, context: error_context)
-    puts error_message
+    Logging.logger.error { error_message }
   end
 
   def not_entitled?(error_txt)

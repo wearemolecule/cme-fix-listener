@@ -29,7 +29,7 @@ describe SupervisionTree::CmeFixListenerActor do
         expect_any_instance_of(klass).to receive(:resume_requests)
         expect_any_instance_of(klass).to receive(:log_resume_requests)
         expect_any_instance_of(klass).not_to receive(:pause_requests)
-        expect(subject).to eq nil
+        subject
       end
     end
 
@@ -40,7 +40,7 @@ describe SupervisionTree::CmeFixListenerActor do
         expect_any_instance_of(klass).to receive(:log_pause_requests)
         expect(CmeFixListener::HeartbeatManager).to receive(:add_maintenance_window_heartbeat_for_account).with(123)
         expect_any_instance_of(klass).not_to receive(:resume_requests)
-        expect(subject).to eq nil
+        subject
       end
     end
   end
@@ -104,7 +104,7 @@ describe SupervisionTree::CmeFixListenerActor do
       before { instance.paused = true }
 
       it 'should log and unpause' do
-        expect(subject).to eq nil
+        subject
         expect(instance.paused).to eq false
       end
     end
@@ -117,7 +117,7 @@ describe SupervisionTree::CmeFixListenerActor do
       before { instance.paused = true }
 
       it 'should not log or unpause' do
-        expect(subject).to eq nil
+        subject
         expect(instance.paused).to eq true
       end
     end
@@ -126,7 +126,7 @@ describe SupervisionTree::CmeFixListenerActor do
       before { instance.paused = false }
 
       it 'should log and pause' do
-        expect(subject).to eq nil
+        subject
         expect(instance.paused).to eq true
       end
     end

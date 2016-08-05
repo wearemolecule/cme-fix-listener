@@ -6,6 +6,7 @@ module SupervisionTree
   class AccountsMasterFetchActor
     include Celluloid
     include ::ErrorNotifierMethods
+    include ::Logging
 
     attr_accessor :parent_container
 
@@ -26,7 +27,7 @@ module SupervisionTree
 
     def fetch_and_set_accounts
       accounts = AccountFetcher.fetch_active_accounts
-      puts "Fetched active CME accounts: \n\n #{accounts}"
+      Logging.logger.debug { "Fetched active CME accounts: \n\n #{accounts}" }
       @parent_container.actors.first.async.set_active_accounts(accounts)
     rescue StandardError => e
       notify_admins_of_error(e, error_message(e), error_context)

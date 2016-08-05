@@ -10,11 +10,12 @@ module SupervisionTree
   class CmeFixListenerActor
     include Celluloid
     include ::ErrorNotifierMethods
+    include ::Logging
 
     attr_accessor :account_id, :account, :request_interval, :paused
 
     def initialize(_parent_container, account_id)
-      puts "Creating CmeFixListenerActor for #{account_id}"
+      Logging.logger.info { "Creating CmeFixListenerActor for #{account_id}" }
       @account_id = account_id
       @account = nil
       @request_interval = ENV['REQUEST_INTERVAL'].present? ? ENV['REQUEST_INTERVAL'].to_i : 10
@@ -78,13 +79,13 @@ module SupervisionTree
     def log_resume_requests
       return unless @paused
       @paused = false
-      puts "#{current_time} is within the availability window. Resuming..."
+      Logging.logger.info { "#{current_time} is within the availability window. Resuming..." }
     end
 
     def log_pause_requests
       return if @paused
       @paused = true
-      puts "#{current_time} is not within the availability window. Pausing..."
+      Logging.logger.info { "#{current_time} is not within the availability window. Pausing..." }
     end
 
     def error_message(account_id, account_details)

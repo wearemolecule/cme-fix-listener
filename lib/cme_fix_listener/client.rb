@@ -4,6 +4,8 @@ module CmeFixListener
   # This class will tell TradeCaptureReportRequest either make a new or continued request to CME,
   # depending on a token existing for the account. Once the request is made, the response is pushed to ResponseHandler.
   class Client
+    include Logging
+
     attr_accessor :account, :requester, :response_handler
 
     def initialize(account)
@@ -33,12 +35,12 @@ module CmeFixListener
     end
 
     def new_client_request
-      puts 'Attempting to Authenticate with CME as a new subscription'
+      Logging.logger.debug('Attempting to Authenticate with CME as a new subscription')
       send_request(:new_client_request)
     end
 
     def existing_client_request(token)
-      puts 'Attempting to Authenticate with CME as a continued subscription'
+      Logging.logger.debug('Attempting to Authenticate with CME as a new subscription')
       send_request(:existing_client_request, token)
     end
 

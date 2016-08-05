@@ -27,7 +27,6 @@ module SupervisionTree
 
     def fetch_and_set_accounts
       account_details = AccountFetcher.fetch_details_for_account_id(@account_id)
-      puts "Fetched account details for account id #{@account_id} \n\n #{account_details}"
       @parent_container.actors.first.async.set_account_details(account_details)
     rescue StandardError => e
       notify_admins_of_error(e, error_message(e), error_context)
