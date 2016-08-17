@@ -12,7 +12,7 @@ describe CmeFixListener::HeartbeatManager do
     let(:timestamp) { Time.now }
     subject { klass.add_heartbeat_for_account(account['id'], timestamp) }
 
-    it 'redis should have the correct members' do
+    it 'redis should have the correct members', redis: true do
       subject
       expect(Resque.redis.get('cme-heartbeat-123')).to eq timestamp.utc.iso8601.to_s
     end
@@ -30,7 +30,7 @@ describe CmeFixListener::HeartbeatManager do
     subject { klass.add_maintenance_window_heartbeat_for_account(account['id']) }
 
     let(:timestamp) { Time.now }
-    it 'redis should have the correct members' do
+    it 'redis should have the correct members', redis: true do
       expect(CmeFixListener::AvailabilityManager).to receive(:end_of_maintenance_window_timestamp).and_return(timestamp)
       subject
       expect(Resque.redis.get('cme-heartbeat-123')).to eq timestamp.utc.iso8601

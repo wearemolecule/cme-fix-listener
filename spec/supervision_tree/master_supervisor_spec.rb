@@ -4,7 +4,7 @@ require 'spec_helper'
 describe SupervisionTree::MasterSupervisor do
   let(:klass) { described_class }
 
-  context 'when creating a new master_supervisor' do
+  context 'when creating a new master_supervisor', redis: true do
     subject { klass.start_working! }
 
     it 'should create two actors' do

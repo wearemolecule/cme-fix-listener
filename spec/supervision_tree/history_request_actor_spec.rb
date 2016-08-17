@@ -102,7 +102,7 @@ describe SupervisionTree::HistoryRequestActor do
     end
   end
 
-  describe '#send_request' do
+  describe '#send_request', redis: true do
     let(:requester) { history_request_klass.new({}, nil, nil) }
 
     subject { instance.send_request(requester, token) }
@@ -126,7 +126,7 @@ describe SupervisionTree::HistoryRequestActor do
     end
   end
 
-  describe '#parse_request' do
+  describe '#parse_request', redis: true do
     subject { instance.parse_request(request) }
 
     context 'a good request' do

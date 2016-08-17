@@ -7,7 +7,7 @@ describe CmeFixListener::HistoryRequestRedisManager do
 
   let(:klass) { described_class }
 
-  describe '.pop_request_from_queue' do
+  describe '.pop_request_from_queue', redis: true do
     subject { klass.pop_request_from_queue }
     before { Resque.redis.rpush('cme-history-request', 'testing123') }
     after(:each) { Resque.redis.flushall }
@@ -23,7 +23,7 @@ describe CmeFixListener::HistoryRequestRedisManager do
     end
   end
 
-  describe '.key_name' do
+  describe '.key_name', redis: true do
     subject { klass.key_name }
 
     it { expect(subject).to eq 'cme-history-request' }
