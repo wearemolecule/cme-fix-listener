@@ -1,3 +1,4 @@
+require 'pry'
 # frozen_string_literal: true
 module CmeFixListener
   # Initiates request to CME and pushes the response along.
@@ -40,7 +41,7 @@ module CmeFixListener
     end
 
     def existing_client_request(token)
-      Logging.logger.debug('Attempting to Authenticate with CME as a new subscription')
+      Logging.logger.debug('Attempting to Authenticate with CME using an existing subscription')
       send_request(:existing_client_request, token)
     end
 
