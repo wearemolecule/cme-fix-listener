@@ -16,6 +16,10 @@ class CmeThor < Thor
       sleep 30 while group.alive?
       puts "Celluloid::Supervision::Container #{self} crashed. Restarting..."
     end
+  rescue SignalException => e
+    # just gracefully exit
+    puts "received signal #{e}"
+    exit
   end
 
   default_task :start_supervising
