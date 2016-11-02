@@ -8,7 +8,7 @@ describe CmeFixListener::TokenManager do
   let(:klass) { described_class }
   let(:account) { { 'id' => 123 } }
 
-  describe '.last_token_for_account' do
+  describe '.last_token_for_account', redis: true do
     subject { klass.last_token_for_account(account['id']) }
     before { Resque.redis.rpush('cme-token-123', '123abc') }
 
@@ -23,7 +23,7 @@ describe CmeFixListener::TokenManager do
     end
   end
 
-  describe '.add_token_for_account' do
+  describe '.add_token_for_account', redis: true do
     let(:header) { { 'token' => 'token', 'account_id' => '123' } }
     subject { klass.add_token_for_account(header) }
 
@@ -41,7 +41,7 @@ describe CmeFixListener::TokenManager do
     end
   end
 
-  describe '.key_name' do
+  describe '.key_name', redis: true do
     subject { klass.key_name(account['id']) }
 
     it { expect(subject).to eq 'cme-token-123' }

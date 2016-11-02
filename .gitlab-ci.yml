@@ -1,0 +1,55 @@
+image: registry.molecule.io/krzysztof.wos/runners:ruby
+
+services:
+  - redis:3.2.1
+
+cache:
+  paths:
+    - Gemfile
+    - Gemfile.lock
+
+before_script:
+  - gem install bundler
+  - bundle install --jobs $(nproc) --path=/cache/bundler
+
+stages:
+  - test
+  - docker_build
+  - docker_push
+
+Unit Test:
+  stage: test
+  script:
+    - bundle exec rspec --tag ~redis .
+
+Redis Test:
+  services:
+    - redis
+  script:
+    - REDIS_HOST=redis REDIS_PORT=6379 bundle exec rspec --tag redis .
+
+Docker Build:
+    stage: docker_build
+    image: docker
+    only:
+      - master
+      - tags
+    artifacts:
+        expire_in: 1 week
+        paths:
+            - cme-fix-listener
+    script:
+        - BUILD_REF_SHORT=$(echo $CI_BUILD_REF | head -c 7)
+        - docker build -t $IMAGE:$BUILD_REF_SHORT .
+
+Docker Push:
+    stage: docker_push
+    image: docker
+    only:
+      - master
+      - tags
+    script:
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.molecule.io
+        - BUILD_REF_SHORT=$(echo $CI_BUILD_REF | head -c 7)
+        - docker push $IMAGE:$BUILD_REF_SHORT
+        - docker rmi $IMAGE:$BUILD_REF_SHORT
