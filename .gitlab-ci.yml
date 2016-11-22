@@ -1,4 +1,4 @@
-image: registry.molecule.io/krzysztof.wos/runners:ruby
+image: registry.molecule.io/wearemolecule/runners:ruby
 
 services:
   - redis:3.2.1
