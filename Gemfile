@@ -13,7 +13,7 @@ gem 'resque'
 gem 'nokogiri'
 gem 'honeybadger'
 gem 'require_all'
-gem 'rake', '~> 10.5'
+gem 'rake'
 
 group :test do
   gem 'rspec'
