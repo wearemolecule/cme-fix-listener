@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 2.3.1
+services:
+  - redis-server
+before_install:
+  - export TZ=America/Chicago
+install:
+  - bundle install
+  - gem install rspec
+script:
+  - bundle exec rspec

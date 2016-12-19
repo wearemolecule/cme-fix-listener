@@ -101,7 +101,7 @@ DEPENDENCIES
   httparty
   nokogiri
   pry
-  rake (~> 10.5)
+  rake
   redis
   require_all
   resque
@@ -112,4 +112,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.4
+   1.13.6
