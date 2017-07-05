@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'thor'
-gem 'celluloid'
-gem 'celluloid-supervision'
 gem 'activesupport'
 gem 'httparty'
 gem 'figaro'
