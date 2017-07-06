@@ -6,6 +6,8 @@ module Worker
     include ::ErrorNotifierMethods
     include ::Logging
 
+    attr_accessor :active_accounts
+
     def initialize
       Logging.logger.info { "Creating Worker::Master" }
       @paused = false
@@ -84,7 +86,7 @@ module Worker
 
     def sleep_before_next_trade_capture(n = 0)
       wait = ENV["REQUEST_INTERVAL"].present? ? ENV["REQUEST_INTERVAL"].to_i : 10
-      wait = wait - n > 0 ? wait - n : 0
+      wait = (wait - n).positive? ? wait - n : 0
       sleep wait
     end
 

@@ -16,6 +16,7 @@ class AccountFetcher
   end
 
   def self.parse_json(response, invalid_json_return_object)
+    return invalid_json_return_object if response == "null"
     JSON.parse(response)
   rescue StandardError
     Logging.logger.error { "Unable to parse JSON: #{response}" }
