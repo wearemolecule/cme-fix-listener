@@ -13,20 +13,14 @@ class CmeThor < Thor
 
   desc "start", "Start trade capture"
   def start
-    work
+    Worker::Master.new.work!
   rescue SignalException => e
     # just gracefully exit
     puts "received signal #{e}"
     exit
   rescue => e
     Honeybadger.notify(error_class: e, error_message: "Uncaught CME Exception: #{e.message}")
-    work
-  end
-
-  private
-
-  def work
-    Worker::Master.new.work!
+    retry
   end
 
   default_task :start

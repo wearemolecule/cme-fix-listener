@@ -24,10 +24,13 @@ module Worker
     private
 
     def fetch
-      fetch_active_accounts!.each do |account_hash|
-        fetch_trades_for_account!(account_hash)
+      elapsed = elapsed_time do
+        fetch_active_accounts!.map do |account_hash|
+          Thread.new { fetch_trades_for_account!(account_hash) }
+        end.map(&:join)
       end
-      sleep_before_next_trade_capture
+
+      sleep_before_next_trade_capture(elapsed)
     end
 
     def pause
@@ -51,8 +54,8 @@ module Worker
     # To fetch the relevant data we need to make 2 requests: 1) Active IDs 2) Account Details.
     def fetch_active_accounts!
       accounts = AccountFetcher.fetch_active_accounts.map do |account_hash|
-        AccountFetcher.fetch_details_for_account_id(account_hash["id"])
-      end
+        Thread.new { AccountFetcher.fetch_details_for_account_id(account_hash["id"]) }
+      end.map(&:join).map(&:value)
       @active_accounts = accounts
       accounts
     rescue => e
@@ -79,13 +82,21 @@ module Worker
       Time.now.in_time_zone("Central Time (US & Canada)")
     end
 
-    def sleep_before_next_trade_capture
-      sleep ENV["REQUEST_INTERVAL"].present? ? ENV["REQUEST_INTERVAL"].to_i : 10
+    def sleep_before_next_trade_capture(n = 0)
+      wait = ENV["REQUEST_INTERVAL"].present? ? ENV["REQUEST_INTERVAL"].to_i : 10
+      wait = wait - n > 0 ? wait - n : 0
+      sleep wait
     end
 
     # Once CME goes into maintenance it won't come back up for a while, sleeping prevents unneeded processing.
     def sleep_before_next_attempted_login
       sleep 900
+    end
+
+    def elapsed_time
+      now = Time.now
+      yield if block_given?
+      Time.now.to_i - now.to_i
     end
   end
 end
