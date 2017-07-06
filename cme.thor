@@ -1,7 +1,8 @@
 # frozen_string_literal: true
-#!/usr/bin/env ruby
 
-require_relative 'config/application.rb'
+# !/usr/bin/env ruby
+
+require_relative "config/application.rb"
 
 # Thor is used to start CME trade capture.
 class CmeThor < Thor
@@ -10,7 +11,7 @@ class CmeThor < Thor
     app_init
   end
 
-  desc 'start', 'Start trade capture'
+  desc "start", "Start trade capture"
   def start
     work
   rescue SignalException => e

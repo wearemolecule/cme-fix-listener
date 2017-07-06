@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module CmeFixListener
   # FIXML -> Hash Parser
   # Given a 5.0 SP2 FIXML message calling `parse_fixml` will create a Hash representation of the message.
@@ -22,12 +23,12 @@ module CmeFixListener
     end
 
     def request_acknowledgement_text
-      report_ack = @xml_doc.xpath('//TrdCaptRptReqAck')
-      report_ack.empty? ? nil : report_ack.attr('Txt').to_s
+      report_ack = @xml_doc.xpath("//TrdCaptRptReqAck")
+      report_ack.empty? ? nil : report_ack.attr("Txt").to_s
     end
 
     def trade_capture_reports
-      @trd_capt_rpts ||= @xml_doc.xpath('//TrdCaptRpt')
+      @trd_capt_rpts ||= @xml_doc.xpath("//TrdCaptRpt")
     end
 
     def transform_document
@@ -35,41 +36,41 @@ module CmeFixListener
     end
 
     def transform_data
-      { 'data' => trade_capture_reports.map { |trd_capt_rpt| transform_trade_capture_report(trd_capt_rpt) } }
+      { "data" => trade_capture_reports.map { |trd_capt_rpt| transform_trade_capture_report(trd_capt_rpt) } }
     end
 
     def transform_meta
-      { 'meta' => MetaParser.attributes_hash(@xml_doc.xpath('FIXML')) }
+      { "meta" => MetaParser.attributes_hash(@xml_doc.xpath("FIXML")) }
     end
 
     def transform_trade_capture_report(trd_capt_rpt)
       {
-        'type' => 'TradeCaptureReport',
-        'id' => TradeCaptureReportParser.parse_id(trd_capt_rpt)
+        "type" => "TradeCaptureReport",
+        "id" => TradeCaptureReportParser.parse_id(trd_capt_rpt)
       }.merge(attributes(trd_capt_rpt))
     end
 
     def attributes(trd_capt_rpt)
       {
-        'attributes' => TradeCaptureReportParser.attributes_hash(trd_capt_rpt).
-          merge(transform_instrmt(trd_capt_rpt.xpath('Instrmt'))).
-          merge(transform_underlying(trd_capt_rpt.xpath('Undly'))).
-          merge(transform_trade_legs(trd_capt_rpt.xpath('TrdLeg'))).
-          merge(transform_report_side(trd_capt_rpt.xpath('RptSide')))
+        "attributes" => TradeCaptureReportParser.attributes_hash(trd_capt_rpt).
+          merge(transform_instrmt(trd_capt_rpt.xpath("Instrmt"))).
+          merge(transform_underlying(trd_capt_rpt.xpath("Undly"))).
+          merge(transform_trade_legs(trd_capt_rpt.xpath("TrdLeg"))).
+          merge(transform_report_side(trd_capt_rpt.xpath("RptSide")))
       }
     end
 
     def transform_instrmt(instrmt)
-      { 'Instrument' => InstrumentParser.attributes_hash(instrmt) }
+      { "Instrument" => InstrumentParser.attributes_hash(instrmt) }
     end
 
     def transform_underlying(undlys)
-      { 'UnderlyingInstrument' => undlys.map { |undly| UnderlyingInstrumentParser.attributes_hash(undly) } }
+      { "UnderlyingInstrument" => undlys.map { |undly| UnderlyingInstrumentParser.attributes_hash(undly) } }
     end
 
     def transform_side_reg_trade_ts(reg_trd_tss)
       {
-        'SideTradeRegulatoryTS' => reg_trd_tss.map do |reg_trd_ts|
+        "SideTradeRegulatoryTS" => reg_trd_tss.map do |reg_trd_ts|
           SideTradeRegulatoryParser.attributes_hash(reg_trd_ts)
         end
       }
@@ -77,50 +78,50 @@ module CmeFixListener
 
     def transform_trade_legs(trade_legs)
       {
-        'TradeLegs' => trade_legs.map do |trade_leg|
+        "TradeLegs" => trade_legs.map do |trade_leg|
           TradeLegParser.attributes_hash(trade_leg).
-            merge(transform_leg_instrument(trade_leg.xpath('Leg'))).
-            merge(transform_underlying_leg_instruments(trade_leg.xpath('Undlys')))
+            merge(transform_leg_instrument(trade_leg.xpath("Leg"))).
+            merge(transform_underlying_leg_instruments(trade_leg.xpath("Undlys")))
         end
       }
     end
 
     def transform_leg_instrument(leg)
-      { 'Leg' => LegInstrumentParser.attributes_hash(leg) }
+      { "Leg" => LegInstrumentParser.attributes_hash(leg) }
     end
 
     def transform_underlying_leg_instruments(undlys)
       {
-        'UnderlyingLegInstruments' => undlys.map do |undly|
-          UnderlyingLegInstrumentParser.attributes_hash(undly.xpath('Undly'))
+        "UnderlyingLegInstruments" => undlys.map do |undly|
+          UnderlyingLegInstrumentParser.attributes_hash(undly.xpath("Undly"))
         end
       }
     end
 
     def transform_report_side(rpt_side)
       {
-        'ReportSide' => ReportSideParser.attributes_hash(rpt_side).
-          merge(transform_parties(rpt_side.xpath('Pty'))).
-          merge(transform_side_reg_trade_group(rpt_side.xpath('RegTrdID'))).
-          merge(transform_side_reg_trade_ts(rpt_side.xpath('TrdRegTS')))
+        "ReportSide" => ReportSideParser.attributes_hash(rpt_side).
+          merge(transform_parties(rpt_side.xpath("Pty"))).
+          merge(transform_side_reg_trade_group(rpt_side.xpath("RegTrdID"))).
+          merge(transform_side_reg_trade_ts(rpt_side.xpath("TrdRegTS")))
       }
     end
 
     def transform_parties(parties)
       {
-        'Parties' => parties.map do |party|
+        "Parties" => parties.map do |party|
           PartyParser.attributes_hash(party).merge(transform_party_sub_group(party))
         end
       }
     end
 
     def transform_party_sub_group(party)
-      { 'PartySubGroup' => party.xpath('Sub').map { |sub_group| PartySubGroupParser.attributes_hash(sub_group) } }
+      { "PartySubGroup" => party.xpath("Sub").map { |sub_group| PartySubGroupParser.attributes_hash(sub_group) } }
     end
 
     def transform_side_reg_trade_group(reg_trd_ids)
       {
-        'SideRegulatoryTradeIDGroup' => reg_trd_ids.map do |reg_trd_id|
+        "SideRegulatoryTradeIDGroup" => reg_trd_ids.map do |reg_trd_id|
           SideRegulatoryTradeGroupParser.attributes_hash(reg_trd_id)
         end
       }

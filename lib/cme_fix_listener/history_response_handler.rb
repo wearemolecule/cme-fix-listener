@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 module CmeFixListener
   # Handles CME responses in a manor suitable for history requests
   class HistoryResponseHandler < ResponseHandler
     def handler_headers(parsed_headers, _raw_headers)
-      @token = parsed_headers['token']
+      @token = parsed_headers["token"]
     end
 
     def body_error_message

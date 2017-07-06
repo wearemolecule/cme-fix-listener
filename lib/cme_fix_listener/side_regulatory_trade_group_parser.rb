@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The SideRegulatoryTradeGroupParser is responsible for the <RegTrdID> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -13,12 +14,12 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['sideRegulatoryTradeID', 'ID'],
-      ['sideRegulatoryTradeSource', 'Src'],
-      ['sideRegulatoryTradeEvent', 'Evnt', :to_i],
-      ['sideRegulatoryTradeType', 'Typ', :to_i],
-      ['sideRegulatoryLegReferenceID', 'LegRefID'],
-      ['sideRegulatoryTradeIDScope', 'Scope', :to_i]
+      ["sideRegulatoryTradeID", "ID"],
+      ["sideRegulatoryTradeSource", "Src"],
+      ["sideRegulatoryTradeEvent", "Evnt", :to_i],
+      ["sideRegulatoryTradeType", "Typ", :to_i],
+      ["sideRegulatoryLegReferenceID", "LegRefID"],
+      ["sideRegulatoryTradeIDScope", "Scope", :to_i]
     ].freeze
   end
 end

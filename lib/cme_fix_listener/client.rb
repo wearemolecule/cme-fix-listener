@@ -1,4 +1,4 @@
-require 'pry'
+require "pry"
 # frozen_string_literal: true
 module CmeFixListener
   # Initiates request to CME and pushes the response along.
@@ -32,16 +32,16 @@ module CmeFixListener
     end
 
     def last_token_for_account
-      CmeFixListener::TokenManager.last_token_for_account(account['id'])
+      CmeFixListener::TokenManager.last_token_for_account(account["id"])
     end
 
     def new_client_request
-      Logging.logger.debug('Attempting to Authenticate with CME as a new subscription')
+      Logging.logger.debug("Attempting to Authenticate with CME as a new subscription")
       send_request(:new_client_request)
     end
 
     def existing_client_request(token)
-      Logging.logger.debug('Attempting to Authenticate with CME using an existing subscription')
+      Logging.logger.debug("Attempting to Authenticate with CME using an existing subscription")
       send_request(:existing_client_request, token)
     end
 
@@ -51,7 +51,7 @@ module CmeFixListener
     end
 
     def log_heartbeat
-      CmeFixListener::HeartbeatManager.add_heartbeat_for_account(account['id'], Time.now)
+      CmeFixListener::HeartbeatManager.add_heartbeat_for_account(account["id"], Time.now)
     end
   end
 end

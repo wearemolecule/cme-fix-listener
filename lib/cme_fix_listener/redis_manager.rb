@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module CmeFixListener
   # Handles any error while performing redis operations.
   class RedisManager

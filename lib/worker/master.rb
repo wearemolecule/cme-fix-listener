@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Worker
   # The Master Worker is the entrypoint to trade capture. The single 'work!' method will block continuously.
   class Master
@@ -6,7 +7,7 @@ module Worker
     include ::Logging
 
     def initialize
-      Logging.logger.info { 'Creating Worker::Master' }
+      Logging.logger.info { "Creating Worker::Master" }
       @paused = false
       @active_accounts = []
     end
@@ -30,7 +31,7 @@ module Worker
     end
 
     def pause
-      CmeFixListener::HeartbeatManager.add_maintenance_window_heartbeat_for_account(account_hash['id'])
+      CmeFixListener::HeartbeatManager.add_maintenance_window_heartbeat_for_account(account_hash["id"])
       sleep_before_next_attempted_login
     end
 
@@ -50,12 +51,12 @@ module Worker
     # To fetch the relevant data we need to make 2 requests: 1) Active IDs 2) Account Details.
     def fetch_active_accounts!
       accounts = AccountFetcher.fetch_active_accounts.map do |account_hash|
-        AccountFetcher.fetch_details_for_account_id(account_hash['id'])
+        AccountFetcher.fetch_details_for_account_id(account_hash["id"])
       end
       @active_accounts = accounts
       accounts
     rescue => e
-      notify_admins_of_error(e, "Error fetching active accounts: #{e.message}", 'Worker::Master')
+      notify_admins_of_error(e, "Error fetching active accounts: #{e.message}", "Worker::Master")
       @active_accounts
     end
 
@@ -65,7 +66,7 @@ module Worker
     def fetch_trades_for_account!(account_hash)
       CmeFixListener::Client.new(account_hash).establish_session!
     rescue => e
-      notify_admins_of_error(e, "Error fetching trades for #{account_hash['id']}: #{e.message}", 'Worker::Master')
+      notify_admins_of_error(e, "Error fetching trades for #{account_hash['id']}: #{e.message}", "Worker::Master")
       nil
     end
 
@@ -75,11 +76,11 @@ module Worker
     end
 
     def current_time
-      Time.now.in_time_zone('Central Time (US & Canada)')
+      Time.now.in_time_zone("Central Time (US & Canada)")
     end
 
     def sleep_before_next_trade_capture
-      sleep ENV['REQUEST_INTERVAL'].present? ? ENV['REQUEST_INTERVAL'].to_i : 10
+      sleep ENV["REQUEST_INTERVAL"].present? ? ENV["REQUEST_INTERVAL"].to_i : 10
     end
 
     # Once CME goes into maintenance it won't come back up for a while, sleeping prevents unneeded processing.

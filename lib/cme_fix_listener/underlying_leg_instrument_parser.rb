@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The UnderlyingLegInstrumentParser is responsible for the <Undly> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -15,11 +16,11 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['legUnderlyingProductCode', 'ID'],
-      ['legUnderlyingProductCodeSource', 'Src'],
-      ['legUnderlyingSecurityType', 'SecTyp'],
-      ['legUnderlyingMaturity', 'MMY'],
-      ['legUnderlyingProductExchange', 'Exch']
+      ["legUnderlyingProductCode", "ID"],
+      ["legUnderlyingProductCodeSource", "Src"],
+      ["legUnderlyingSecurityType", "SecTyp"],
+      ["legUnderlyingMaturity", "MMY"],
+      ["legUnderlyingProductExchange", "Exch"]
     ].freeze
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Helper methods used to notify us of errors
 module ErrorNotifierMethods
   include Logging
@@ -29,7 +30,7 @@ module ErrorNotifierMethods
   end
 
   def authentication_failed_error_message
-    'Invalid Credentials for Account'
+    "Invalid Credentials for Account"
   end
 
   def query_error?(error_txt)
@@ -37,6 +38,6 @@ module ErrorNotifierMethods
   end
 
   def query_error_message
-    'Request ID or Party Role most likely not set correctly'
+    "Request ID or Party Role most likely not set correctly"
   end
 end
