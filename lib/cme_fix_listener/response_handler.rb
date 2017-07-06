@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class TokenNotFound < StandardError; end
 class CmeResponseHasErrors < StandardError; end
 module CmeFixListener
@@ -16,7 +17,7 @@ module CmeFixListener
     def initialize(account)
       Logging.logger.info { "Creating ResponseHandler for #{account['id']}" }
       @account = account
-      @account_id = account['id']
+      @account_id = account["id"]
       @body_has_errors = false
       @token = nil
     end
@@ -34,14 +35,14 @@ module CmeFixListener
 
     def parse_headers(headers)
       {
-        'token' => headers['x-cme-token'],
-        'account_id' => @account_id,
-        'created_at' => headers['date']
+        "token" => headers["x-cme-token"],
+        "account_id" => @account_id,
+        "created_at" => headers["date"]
       }
     end
 
     def handle_headers(parsed_headers, raw_headers)
-      if parsed_headers['token'].blank?
+      if parsed_headers["token"].blank?
         notify_admins_of_error(TokenNotFound, header_error_message, header_error_context(raw_headers, parsed_headers))
       else
         CmeFixListener::TokenManager.add_token_for_account(parsed_headers)
@@ -93,7 +94,7 @@ module CmeFixListener
       return does_not_belong_to_error_message if does_not_belong_to?(error_text)
       return authentication_failed_error_message if authentication_failed?(error_text)
       return query_error_message if query_error?(error_text)
-      'Unable to estimate error'
+      "Unable to estimate error"
     end
 
     def header_error_message

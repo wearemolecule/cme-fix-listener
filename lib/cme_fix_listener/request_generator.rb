@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module CmeFixListener
   # Builds a valid trade capture report request xml message required by CME.
   class RequestGenerator
@@ -8,10 +9,10 @@ module CmeFixListener
 
     def initialize(account)
       @account = account
-      @request_id = account['cmeRequestId']
-      @username = account['cmeUsername']
-      @firm_sid = account['cmeFirmSid']
-      @party_role = account['cmePartyRole']
+      @request_id = account["cmeRequestId"]
+      @username = account["cmeUsername"]
+      @firm_sid = account["cmeFirmSid"]
+      @party_role = account["cmePartyRole"]
     end
 
     def build_xml(request_type)
@@ -29,10 +30,10 @@ module CmeFixListener
 
     def fixml_attrs
       {
-        v: '5.0 SP2',
-        s: '20090815',
-        xv: '109',
-        cv: 'CME.0001'
+        v: "5.0 SP2",
+        s: "20090815",
+        xv: "109",
+        cv: "CME.0001"
       }
     end
 
@@ -40,17 +41,17 @@ module CmeFixListener
       {
         ReqID: @request_id,
         ReqTyp: request_type,
-        SubReqTyp: '1',
-        MLegRptTyp: '3'
+        SubReqTyp: "1",
+        MLegRptTyp: "3"
       }
     end
 
     def header_attrs
       {
         SID: @firm_sid,
-        TID: 'CME',
+        TID: "CME",
         SSub: @username,
-        TSub: 'STP'
+        TSub: "STP"
       }
     end
 

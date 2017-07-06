@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The PartySubGroupParser is responsible for the <Sub> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -13,8 +14,8 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['partyQualifierID', 'ID'],
-      ['partyQualifierType', 'Typ', :to_i]
+      ["partyQualifierID", "ID"],
+      ["partyQualifierType", "Typ", :to_i]
     ].freeze
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module CmeFixListener
   # Parsing helper methods
   module ParsingMethods

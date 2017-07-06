@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module RedisTestHelpers
   def raise_redis_connection_error(method)
     expect(Resque.redis).to receive(method).and_raise(Redis::CannotConnectError)

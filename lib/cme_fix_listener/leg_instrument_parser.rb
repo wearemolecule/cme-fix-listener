@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The LegInstrumentParser is responsible for the <Leg> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -14,18 +15,18 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['legSymbol', 'Sym'],
-      ['legProductCode', 'ID'],
-      ['legProductIDSource', 'Src'],
-      ['legCFI', 'CFI'],
-      ['legSecurityType', 'SecTyp'],
-      ['legMaturity', 'MMY'],
-      ['legMaturityDate', 'Mat'],
-      ['legStrikePrice', 'Strk', :to_f],
-      ['legContractMultiplier', 'Mult', :to_f],
-      ['legProductExchange', 'Exch'],
-      ['legBuySellCode', 'Side'],
-      ['legPutCall', 'PutCall', :to_i]
+      ["legSymbol", "Sym"],
+      ["legProductCode", "ID"],
+      ["legProductIDSource", "Src"],
+      ["legCFI", "CFI"],
+      ["legSecurityType", "SecTyp"],
+      ["legMaturity", "MMY"],
+      ["legMaturityDate", "Mat"],
+      ["legStrikePrice", "Strk", :to_f],
+      ["legContractMultiplier", "Mult", :to_f],
+      ["legProductExchange", "Exch"],
+      ["legBuySellCode", "Side"],
+      ["legPutCall", "PutCall", :to_i]
     ].freeze
   end
 end

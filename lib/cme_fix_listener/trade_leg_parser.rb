@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The TradeLegParser is responsible for the <TrdLeg> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -13,12 +14,12 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['legQuantity', 'Qty', :to_f],
-      ['legReportID', 'RptID'],
-      ['legNumber', 'LegNo', :to_i],
-      ['legReferenceID', 'RefID'],
-      ['legLastPrice', 'LastPx', :to_f],
-      ['legOriginalTimeUnit', 'OrigTmUnit']
+      ["legQuantity", "Qty", :to_f],
+      ["legReportID", "RptID"],
+      ["legNumber", "LegNo", :to_i],
+      ["legReferenceID", "RefID"],
+      ["legLastPrice", "LastPx", :to_f],
+      ["legOriginalTimeUnit", "OrigTmUnit"]
     ].freeze
   end
 end

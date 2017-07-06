@@ -1,28 +1,28 @@
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
+# frozen_string_literal: true
 
-require_relative 'config/application.rb'
+require_relative "config/application.rb"
 
-# In this context thor is used to start the program. The command ./cme.thor will call the default start_supervising method (after initialization).
+# Thor is used to start CME trade capture.
 class CmeThor < Thor
   def initialize(*_args)
     super
     app_init
   end
 
-  desc 'start', 'Start celluloid'
-  def start_supervising
-    loop do
-      group = SupervisionTree::MasterSupervisor.start_working!
-      sleep 30 while group.alive?
-      puts "Celluloid::Supervision::Container #{self} crashed. Restarting..."
-    end
+  desc "start", "Start trade capture"
+  def start
+    Worker::Master.new.work!
   rescue SignalException => e
     # just gracefully exit
     puts "received signal #{e}"
     exit
+  rescue => e
+    Honeybadger.notify(error_class: e, error_message: "Uncaught CME Exception: #{e.message}")
+    retry
   end
 
-  default_task :start_supervising
+  default_task :start
 end
 
 CmeThor.start

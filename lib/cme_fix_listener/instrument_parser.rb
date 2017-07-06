@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The InstrumentParser is responsible for the <Instrmt> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -14,26 +15,26 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['productSymbol', 'Sym'],
-      ['productCode', 'ID'],
-      ['productSourceCode', 'Src'],
-      ['cfiCode', 'CFI'],
-      ['securityType', 'SecTyp'],
-      ['indexName', 'SubTyp'],
-      ['contractPeriodCode', 'MMY'],
-      ['maturityDate', 'MatDt'],
-      ['nextCouponCode', 'CpnPmt'],
-      ['restructuringType', 'RestrctTyp'],
-      ['seniority', 'Snrty'],
-      ['strikePrice', 'StrkPx', :to_f],
-      ['priceMultiplier', 'Mult', :to_f],
-      ['unitOfMeasure', 'UOM'],
-      ['unitOfMeasureCurrency', 'UOMCcy'],
-      ['putCall', 'PutCall', :to_i],
-      ['couponRate', 'CpnRt'],
-      ['productExchange', 'Exch'],
-      ['nextCouponDate', 'IntArcl'],
-      ['priceQuoteCurrency', 'PxQteCcy']
+      ["productSymbol", "Sym"],
+      ["productCode", "ID"],
+      ["productSourceCode", "Src"],
+      ["cfiCode", "CFI"],
+      ["securityType", "SecTyp"],
+      ["indexName", "SubTyp"],
+      ["contractPeriodCode", "MMY"],
+      ["maturityDate", "MatDt"],
+      ["nextCouponCode", "CpnPmt"],
+      ["restructuringType", "RestrctTyp"],
+      ["seniority", "Snrty"],
+      ["strikePrice", "StrkPx", :to_f],
+      ["priceMultiplier", "Mult", :to_f],
+      ["unitOfMeasure", "UOM"],
+      ["unitOfMeasureCurrency", "UOMCcy"],
+      ["putCall", "PutCall", :to_i],
+      ["couponRate", "CpnRt"],
+      ["productExchange", "Exch"],
+      ["nextCouponDate", "IntArcl"],
+      ["priceQuoteCurrency", "PxQteCcy"]
     ].freeze
   end
 end

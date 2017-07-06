@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The TradeCaptureReportParser is responsible for the <TrdCaptRpt> mapping. This tag is one of many tags inside
 # a FIXML message. To see a complete FIXML message there are many examples inside of spec/datafiles.
 #
@@ -17,40 +18,40 @@ module CmeFixListener
     extend ParsingMethods
 
     MAPPINGS = [
-      ['messageID', 'RptID'],
-      ['tradeID', 'TrdID'],
-      ['secondaryTradeID', 'TrdID2'],
-      ['packageID', 'PackageID'],
-      ['transactionType', 'TransTyp', :to_i],
-      ['tradeReportType', 'RptTyp', :to_i],
-      ['tradeStatus', 'TrdRptStat', :to_i],
-      ['requestID', 'ReqID'],
-      ['tradeType', 'TrdTyp', :to_i],
-      ['tradeSubType', 'TrdSubTyp', :to_i],
-      ['offsetInstruction', 'OfstInst', :to_i],
-      ['tradeMatchID', 'MtchID'],
-      ['executionID', 'ExecID'],
-      ['secondaryExecutionID', 'ExecID2'],
-      ['blockID', 'BlckID'],
-      ['priceType', 'PxTyp', :to_i],
-      ['venueType', 'VenuTyp'],
-      ['quantityType', 'QtyTyp', :to_i],
-      ['tradeQuantity', 'LastQty', :to_f],
-      ['tradePrice', 'LastPx', :to_f],
-      ['tradeDate', 'TrdDt'],
-      ['clearDate', 'BizDt'],
-      ['averagePrice', 'AvgPx', :to_f],
-      ['multiLegReportingType', 'MLegRptTyp'],
-      ['transactionTime', 'TxnTm'],
-      ['lastUpdateTime', 'LastUpdateTm'],
-      ['tradePriceNegotiationMethod', 'PxNeg', :to_i],
-      ['differentialPrice', 'DiffPx', :to_f],
-      ['differentialPriceType', 'DiffPxtyp', :to_i],
-      ['originalTimeUnit', 'OrigTmUnit']
+      ["messageID", "RptID"],
+      ["tradeID", "TrdID"],
+      ["secondaryTradeID", "TrdID2"],
+      ["packageID", "PackageID"],
+      ["transactionType", "TransTyp", :to_i],
+      ["tradeReportType", "RptTyp", :to_i],
+      ["tradeStatus", "TrdRptStat", :to_i],
+      ["requestID", "ReqID"],
+      ["tradeType", "TrdTyp", :to_i],
+      ["tradeSubType", "TrdSubTyp", :to_i],
+      ["offsetInstruction", "OfstInst", :to_i],
+      ["tradeMatchID", "MtchID"],
+      ["executionID", "ExecID"],
+      ["secondaryExecutionID", "ExecID2"],
+      ["blockID", "BlckID"],
+      ["priceType", "PxTyp", :to_i],
+      ["venueType", "VenuTyp"],
+      ["quantityType", "QtyTyp", :to_i],
+      ["tradeQuantity", "LastQty", :to_f],
+      ["tradePrice", "LastPx", :to_f],
+      ["tradeDate", "TrdDt"],
+      ["clearDate", "BizDt"],
+      ["averagePrice", "AvgPx", :to_f],
+      ["multiLegReportingType", "MLegRptTyp"],
+      ["transactionTime", "TxnTm"],
+      ["lastUpdateTime", "LastUpdateTm"],
+      ["tradePriceNegotiationMethod", "PxNeg", :to_i],
+      ["differentialPrice", "DiffPx", :to_f],
+      ["differentialPriceType", "DiffPxtyp", :to_i],
+      ["originalTimeUnit", "OrigTmUnit"]
     ].freeze
 
     def self.parse_id(trd_cpt_rpt)
-      xpath_value(trd_cpt_rpt, '@RptID', :to_s) + xpath_value(trd_cpt_rpt, '@TrdID2', :to_s)
+      xpath_value(trd_cpt_rpt, "@RptID", :to_s) + xpath_value(trd_cpt_rpt, "@TrdID2", :to_s)
     end
   end
 end
