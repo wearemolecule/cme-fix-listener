@@ -18,8 +18,8 @@ module Worker
     # in each method.
     def work!
       loop do
-        log_activity
         inside_operating_window? ? fetch : pause
+        log_activity
       end
     end
 
@@ -36,7 +36,11 @@ module Worker
     end
 
     def pause
-      CmeFixListener::HeartbeatManager.add_maintenance_window_heartbeat_for_account(account_hash["id"])
+      return if @paused
+      fetch_active_accounts!.map do |account_hash|
+        Thread.new { CmeFixListener::HeartbeatManager.add_maintenance_window_heartbeat_for_account(account_hash["id"]) }
+      end.map(&:join)
+
       sleep_before_next_attempted_login
     end
 

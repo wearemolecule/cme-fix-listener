@@ -16,13 +16,22 @@ class CmeThor < Thor
   rescue SignalException => e
     # just gracefully exit
     puts "received signal #{e}"
+    kill_all_threads
     exit
   rescue => e
     Honeybadger.notify(error_class: e, error_message: "Uncaught CME Exception: #{e.message}")
+    kill_all_threads
     retry
   end
-
   default_task :start
+
+  private
+
+  def kill_all_threads
+    Thread.list.each do |thread|
+      thread.exit unless thread == Thread.current
+    end
+  end
 end
 
 CmeThor.start
