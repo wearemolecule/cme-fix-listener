@@ -18,7 +18,12 @@ module Worker
     # in each method.
     def work!
       loop do
-        inside_operating_window? ? fetch : pause
+        if inside_operating_window?
+          fetch
+          check_for_history_request
+        else
+          pause
+        end
         log_activity
       end
     end
@@ -33,6 +38,14 @@ module Worker
       end
 
       sleep_before_next_trade_capture(elapsed)
+    end
+
+    def check_for_history_request
+      fetch_active_accounts!.map do |account_hash|
+        Thread.new { CmeFixListener::HistoryRequestClient.new(account_hash).history_request! }
+      end.map(&:join)
+
+      sleep_before_next_history_request
     end
 
     def pause
@@ -97,6 +110,10 @@ module Worker
     # Once CME goes into maintenance it won't come back up for a while, sleeping prevents unneeded processing.
     def sleep_before_next_attempted_login
       sleep 900
+    end
+
+    def sleep_for_next_history_request
+      sleep 60
     end
 
     def elapsed_time
