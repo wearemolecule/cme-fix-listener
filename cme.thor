@@ -19,6 +19,7 @@ class CmeThor < Thor
     kill_all_threads
     exit
   rescue => e
+    Logging.logger.error { "Uncaught CME Exception: #{e.message}" }
     Honeybadger.notify(error_class: e, error_message: "Uncaught CME Exception: #{e.message}")
     kill_all_threads
     retry

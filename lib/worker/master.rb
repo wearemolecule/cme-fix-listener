@@ -112,7 +112,7 @@ module Worker
       sleep 900
     end
 
-    def sleep_for_next_history_request
+    def sleep_before_next_history_request
       sleep 60
     end
 
