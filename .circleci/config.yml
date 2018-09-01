@@ -10,7 +10,7 @@ jobs:
       - image: circleci/ruby:2.3.7-jessie-node-browsers
         environment:
           TZ: "America/Chicago"
-      - image: redis
+      - image: redis:4.0-stretch
 
     working_directory: ~/repo
 
