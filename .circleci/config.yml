@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-       - image: circleci/2.3.7-jessie-node-browsers
+      - image: circleci/ruby:2.3.7-jessie-node-browsers
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
