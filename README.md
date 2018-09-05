@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/wearemolecule/cme-fix-listener.svg?style=svg)](https://circleci.com/gh/wearemolecule/cme-fix-listener)
 ![Molecule Software](https://avatars1.githubusercontent.com/u/2736908?v=3&s=100 "Molecule Software")
 # CME STP Adapter
 
