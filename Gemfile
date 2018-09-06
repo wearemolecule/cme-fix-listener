@@ -21,4 +21,6 @@ end
 
 group :development, :test do
   gem "pry"
+  gem "rb-readline"
+  gem "rspec_junit_formatter"
 end

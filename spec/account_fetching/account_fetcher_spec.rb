@@ -15,7 +15,7 @@ describe AccountFetcher do
     context "using a config file fetcher" do
       before { ENV["FETCH_ACCOUNT_FROM_CONFIG"] = "true" }
       it do
-        expect(config_klass).to receive(:fetch_details_for_account_id).with(id).and_return(nil)
+        expect(config_klass).to receive(:fetch_details_for_account_id).with(id).and_return("{}")
         subject
       end
     end
@@ -23,7 +23,7 @@ describe AccountFetcher do
     context "using a http fetcher" do
       before { ENV["FETCH_ACCOUNT_FROM_CONFIG"] = nil }
       it do
-        expect(http_klass).to receive(:fetch_details_for_account_id).with(id).and_return(nil)
+        expect(http_klass).to receive(:fetch_details_for_account_id).with(id).and_return("{}")
         subject
       end
     end
@@ -35,7 +35,7 @@ describe AccountFetcher do
     context "using a config file fetcher" do
       before { ENV["FETCH_ACCOUNT_FROM_CONFIG"] = "true" }
       it do
-        expect(config_klass).to receive(:fetch_active_accounts).and_return(nil)
+        expect(config_klass).to receive(:fetch_active_accounts).and_return("{}")
         subject
       end
     end
@@ -43,7 +43,7 @@ describe AccountFetcher do
     context "using a HTTP fetcher" do
       before { ENV["FETCH_ACCOUNT_FROM_CONFIG"] = nil }
       it do
-        expect(http_klass).to receive(:fetch_active_accounts).and_return(nil)
+        expect(http_klass).to receive(:fetch_active_accounts).and_return("{}")
         subject
       end
     end
@@ -59,7 +59,7 @@ describe AccountFetcher do
     end
 
     context "when there is not valid JSON" do
-      let(:response) { {} }
+      let(:response) { "nope" }
       let(:invalid_return_object) { [] }
       it { expect(subject).to eq invalid_return_object }
     end
