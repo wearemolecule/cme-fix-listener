@@ -67,7 +67,8 @@ module CmeFixListener
 
     def plain_text_header
       {
-        "Content-Type" => "text/plain"
+        "Content-Type" => "text/plain",
+        "Accept-Encoding" => "gzip, deflate"
       }
     end
 
