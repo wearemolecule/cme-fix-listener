@@ -16,7 +16,7 @@ describe CmeFixListener::TradeCaptureReportRequester do
   end
 
   describe "#new_client_request" do
-    let(:header) { { "Content-Type" => "text/plain" } }
+    let(:header) { { "Content-Type" => "text/plain", "Accept-Encoding"=>"gzip, deflate" } }
     let(:body) { "body" }
     let(:base_auth) do
       {
