@@ -56,7 +56,7 @@ describe CmeFixListener::TradeCaptureReportRequester do
   describe "#existing_client_request" do
     let(:token) { "123" }
     let(:body) { "body" }
-    let(:header) { { "Content-Type" => "text/plain", "x-cme-token" => token } }
+    let(:header) { { "Content-Type" => "text/plain", "Accept-Encoding" => "gzip, deflate", "x-cme-token" => token } }
     let(:base_auth) do
       {
         basic_auth: {
