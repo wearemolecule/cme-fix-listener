@@ -73,10 +73,7 @@ module CmeFixListener
     end
 
     def token_header(token)
-      {
-        "Content-Type" => "text/plain",
-        "x-cme-token" => token
-      }
+      plain_text_header.merge("x-cme-token" => token)
     end
   end
 end
