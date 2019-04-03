@@ -10,7 +10,7 @@ module CmeFixListener
     attr_accessor :account_hash
 
     def initialize(account_hash)
-      puts "Creating HistoryRequestClient"
+      Logging.logger.info "Creating HistoryRequestClient"
       self.account_hash = account_hash
     end
 

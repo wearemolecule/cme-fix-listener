@@ -29,8 +29,17 @@ module CmeFixListener
 
     def post_client_request(type, header)
       attempts ||= 2
-      post_http_request(request_body(type), header)
+      Logging.logger.debug do
+        [
+          "Posting request to CME",
+          type, cme_url, header, request_body(type)
+        ]
+      end
+      response = post_http_request(request_body(type), header)
+      Logging.logger.debug { response }
+      response
     rescue Net::ReadTimeout
+      Logging.logger.debug { "Request Timeout, retrying" }
       configurable_sleep
       retry unless (attempts -= 1).zero?
     end
