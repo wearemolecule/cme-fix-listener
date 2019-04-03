@@ -8,7 +8,7 @@ module CmeFixListener
     def self.catch_errors(action)
       yield if block_given?
     rescue StandardError => e
-      notify_admins_of_error(e, error_message(e, action), { errors: e.message })
+      notify_admins_of_error(e, error_message(e, action), errors: e.message)
     end
 
     def self.error_message(e, action)
