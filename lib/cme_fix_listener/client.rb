@@ -1,4 +1,3 @@
-require "pry"
 # frozen_string_literal: true
 module CmeFixListener
   # Initiates request to CME and pushes the response along.
