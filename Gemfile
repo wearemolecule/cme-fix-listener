@@ -11,7 +11,7 @@ gem "nokogiri", "~> 1.8.5"
 gem "rake"
 gem "redis"
 gem "require_all"
-gem "resque"
+gem "resque", "~> 2.0.0"
 gem "rubocop", "~> 0.49.1", require: false
 gem "thor"
 
