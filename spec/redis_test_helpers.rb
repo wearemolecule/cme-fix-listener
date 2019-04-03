@@ -7,6 +7,6 @@ module RedisTestHelpers
 
   def expect_errors_and_notify_honeybadger
     expect(Honeybadger).to receive(:notify)
-    expect(subject[:errors].present?).to eq true
+    subject
   end
 end
