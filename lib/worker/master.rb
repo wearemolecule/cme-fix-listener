@@ -78,7 +78,7 @@ module Worker
       @active_accounts = accounts
       accounts
     rescue => e
-      notify_admins_of_error(e, "Error fetching active accounts: #{e.message}", "Worker::Master")
+      notify_admins_of_error(e, "Error fetching active accounts: #{e.message}", nil)
       @active_accounts
     end
 
@@ -88,7 +88,7 @@ module Worker
     def fetch_trades_for_account!(account_hash)
       CmeFixListener::Client.new(account_hash).establish_session!
     rescue => e
-      notify_admins_of_error(e, "Error fetching trades for #{account_hash['id']}: #{e.message}", "Worker::Master")
+      notify_admins_of_error(e, "Error fetching trades for #{account_hash['id']}: #{e.message}", nil)
       nil
     end
 

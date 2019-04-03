@@ -24,6 +24,9 @@ describe Worker::Master do
     end
 
     it "should returned cached accounts if the lookup fails" do
+      logger = double("some logger").as_null_object
+      allow(Logging).to receive(:logger).and_return(logger)
+
       worker = Worker::Master.new
       worker.active_accounts = [{ "id" => 1, "name" => "Account1" }]
       expect(AccountFetcher).to receive(:fetch_active_accounts).and_raise(RuntimeError)
