@@ -33,7 +33,10 @@ module Worker
     def fetch
       elapsed = elapsed_time do
         fetch_active_accounts!.map do |account_hash|
-          Thread.new { fetch_trades_for_account!(account_hash) }
+          Thread.new do
+            fetch_trades_for_account!(account_hash)
+            Thread.current.exit
+          end
         end.map(&:join)
       end
 
@@ -42,7 +45,10 @@ module Worker
 
     def check_for_history_request
       fetch_active_accounts!.map do |account_hash|
-        Thread.new { CmeFixListener::HistoryRequestClient.new(account_hash).history_request! }
+        Thread.new do
+          CmeFixListener::HistoryRequestClient.new(account_hash).history_request!
+          Thread.current.exit
+        end
       end.map(&:join)
 
       sleep_before_next_history_request
