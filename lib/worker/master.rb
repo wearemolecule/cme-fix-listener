@@ -35,7 +35,6 @@ module Worker
         fetch_active_accounts!.map do |account_hash|
           Thread.new do
             fetch_trades_for_account!(account_hash)
-            Thread.current.exit
           end
         end.map(&:join)
       end
@@ -47,7 +46,6 @@ module Worker
       fetch_active_accounts!.map do |account_hash|
         Thread.new do
           CmeFixListener::HistoryRequestClient.new(account_hash).history_request!
-          Thread.current.exit
         end
       end.map(&:join)
 
