@@ -17,14 +17,14 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.4.0)
     minitest (5.8.3)
     mono_logger (1.1.0)
     multi_json (1.13.1)
     multi_xml (0.5.5)
     mustermann (1.0.3)
-    nokogiri (1.8.5)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.10.8)
+      mini_portile2 (~> 2.4.0)
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
@@ -90,7 +90,7 @@ DEPENDENCIES
   figaro
   honeybadger
   httparty
-  nokogiri (~> 1.8.5)
+  nokogiri (~> 1.10.8)
   rake
   redis
   require_all
