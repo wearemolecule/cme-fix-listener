@@ -85,7 +85,7 @@ describe CmeFixListener::HistoryRequestClient do
     context "when the token is not present" do
       let(:token) { "" }
 
-      it "should make an existing_client_request" do
+      it "should make a new_client_request" do
         expect_any_instance_of(history_request_klass).to receive(:new_client_request).with(nil)
         subject
       end

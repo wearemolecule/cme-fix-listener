@@ -9,7 +9,7 @@ module CmeFixListener
 
     def initialize(account)
       @account = account
-      @request_id = account["cmeRequestId"]
+      @request_id = account["cmeRequestID"]
       @username = account["cmeUsername"]
       @firm_sid = account["cmeFirmSid"]
       @party_role = account["cmePartyRole"]
@@ -28,6 +28,10 @@ module CmeFixListener
 
     protected
 
+    def generator_type
+      "REGULAR"
+    end
+
     def fixml_attrs
       {
         v: "5.0 SP2",
@@ -39,7 +43,7 @@ module CmeFixListener
 
     def trd_cpt_rpt_request_attrs(request_type)
       {
-        ReqID: @request_id,
+        ReqID: [ENV.fetch("NAMESPACE", "DEVELOPMENT"), @account["id"], generator_type, @account["cmeRequestID"]].join("-"),
         ReqTyp: request_type,
         SubReqTyp: "1",
         MLegRptTyp: "3"

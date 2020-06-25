@@ -81,7 +81,7 @@ module Worker
       end.map(&:join).map(&:value)
       @active_accounts = accounts
       accounts
-    rescue => e
+    rescue StandardError => e
       notify_admins_of_error(e, "Error fetching active accounts: #{e.message}", nil)
       @active_accounts
     end
@@ -91,7 +91,7 @@ module Worker
     # We should catch all errors so errors fetch trades for any single account doesn't affect any other account.
     def fetch_trades_for_account!(account_hash)
       CmeFixListener::Client.new(account_hash).establish_session!
-    rescue => e
+    rescue StandardError => e
       notify_admins_of_error(e, "Error fetching trades for #{account_hash['id']}: #{e.message}", nil)
       nil
     end

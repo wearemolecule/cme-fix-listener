@@ -9,7 +9,8 @@ describe CmeFixListener::RequestGenerator do
 
   let(:account) do
     {
-      "cmeRequestId" => "COMPANY_NAME",
+      "id" => "400",
+      "cmeRequestID" => "COMPANY_NAME",
       "cmeUsername" => "USERNAME_SPEC",
       "cmeFirmSid" => "COMPANY_SPEC",
       "cmePartyRole" => "7"

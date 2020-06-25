@@ -18,7 +18,7 @@ class CmeThor < Thor
     puts "received signal #{e}"
     kill_all_threads
     exit
-  rescue => e
+  rescue StandardError => e
     Logging.logger.error { "Uncaught CME Exception: #{e.message}" }
     Honeybadger.notify(error_class: e, error_message: "Uncaught CME Exception: #{e.message}", backtrace: e.backtrace)
     kill_all_threads

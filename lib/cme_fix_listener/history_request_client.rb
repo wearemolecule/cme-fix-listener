@@ -25,14 +25,11 @@ module CmeFixListener
     private
 
     def fetch_request_info_from_redis
-      CmeFixListener::HistoryRequestRedisManager.pop_request_from_queue
+      CmeFixListener::HistoryRequestRedisManager.pop_request_from_queue(self.account_hash["id"])
     end
 
     def parse_request(request)
       json_request = JSON.parse(request)
-      if json_request["account_id"].blank?
-        fail BadHistoryRequestError, "Request must include an account id, start time, and end time."
-      end
       json_request["start_time"] = parsed_start_time(json_request)
       json_request["end_time"] = parsed_end_time(json_request)
       json_request

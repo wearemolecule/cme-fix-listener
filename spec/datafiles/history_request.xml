@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <FIXML v="5.0 SP2" s="20090815" xv="109" cv="CME.0001">
-  <TrdCaptRptReq ReqID="COMPANY_NAME" ReqTyp="1" SubReqTyp="0" MLegRptTyp="3" StartTm="2016-01-01" EndTm="2016-01-02">
+  <TrdCaptRptReq ReqID="DEVELOPMENT-300-HISTORY-COMPANY_NAME" ReqTyp="1" SubReqTyp="0" MLegRptTyp="3" StartTm="2016-01-01" EndTm="2016-01-02">
     <Hdr SID="COMPANY_SPEC" TID="CME" SSub="USERNAME_SPEC" TSub="STP"/>
     <Pty ID="COMPANY_SPEC" R="7"/>
   </TrdCaptRptReq>

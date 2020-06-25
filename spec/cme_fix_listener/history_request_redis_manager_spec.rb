@@ -6,27 +6,26 @@ require "redis_test_helpers"
 describe CmeFixListener::HistoryRequestRedisManager do
   include RedisTestHelpers
 
-  let(:klass) { described_class }
-
   describe ".pop_request_from_queue", redis: true do
-    subject { klass.pop_request_from_queue }
-    before { Resque.redis.rpush("cme-history-request", "testing123") }
-    after(:each) { Resque.redis.flushall }
+    let(:account1) { "300" }
+    let(:account2) { "301" }
+    before do
+      Resque.redis.rpush("cme-history-request-#{account1}", "guitar")
+      Resque.redis.rpush("cme-history-request-#{account2}", "drums")
+    end
+    after(:each) { Resque.redis.redis.flushall }
 
-    it { expect(subject).to eq "testing123" }
+    it "gets from the right queue" do
+      expect(described_class.pop_request_from_queue(account1)).to eq "guitar"
+      expect(described_class.pop_request_from_queue(account2)).to eq "drums"
+    end
 
     context "when there is a resque error" do
-      before { raise_redis_connection_error(:rpop) }
-
       it "should notify honeybadger and return an error" do
+        raise_redis_connection_error(:rpop)
         expect_errors_and_notify_honeybadger
+        described_class.pop_request_from_queue("NONE")
       end
     end
-  end
-
-  describe ".key_name", redis: true do
-    subject { klass.key_name }
-
-    it { expect(subject).to eq "cme-history-request" }
   end
 end

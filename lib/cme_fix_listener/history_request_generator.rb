@@ -30,5 +30,9 @@ module CmeFixListener
         "EndTm" => end_time
       }
     end
+
+    def generator_type
+      "HISTORY"
+    end
   end
 end
