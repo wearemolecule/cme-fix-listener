@@ -29,7 +29,7 @@ GEM
     parser (2.5.1.2)
       ast (~> 2.4.0)
     powerpack (0.1.2)
-    rack (2.0.8)
+    rack (2.2.3)
     rack-protection (2.0.5)
       rack
     rainbow (2.2.2)
