@@ -20,5 +20,8 @@ group :test do
 end
 
 group :development, :test do
+  gem "pry"
+  gem "pry-nav"
+  gem "pry-rescue"
   gem "rspec_junit_formatter"
 end
