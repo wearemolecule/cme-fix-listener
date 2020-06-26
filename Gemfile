@@ -17,11 +17,11 @@ gem "thor"
 
 group :test do
   gem "rspec"
+  gem "rspec_junit_formatter"
 end
 
 group :development, :test do
   gem "pry"
   gem "pry-nav"
   gem "pry-rescue"
-  gem "rspec_junit_formatter"
 end
