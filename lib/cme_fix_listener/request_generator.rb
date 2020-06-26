@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "active_support/testing/time_helpers"
 module CmeFixListener
   # Builds a valid trade capture report request xml message required by CME.
   class RequestGenerator
@@ -16,9 +17,10 @@ module CmeFixListener
     end
 
     def build_xml(request_type)
+      params = initial_history(request_type)
       Nokogiri::XML::Builder.new do |xml|
         xml.FIXML(fixml_attrs) do
-          xml.TrdCaptRptReq(trd_cpt_rpt_request_attrs(request_type)) do
+          xml.TrdCaptRptReq(trd_cpt_rpt_request_attrs(request_type).merge(params)) do
             xml.Hdr(header_attrs)
             xml.Pty(party_attrs)
           end
@@ -27,6 +29,14 @@ module CmeFixListener
     end
 
     protected
+
+    def initial_history(request_type)
+      return {} if request_type != "1"
+      start_time = Time.now - 1.hour
+      {
+        "StartTm" => start_time.to_s(:iso8601)
+      }
+    end
 
     def generator_type
       "REGULAR"

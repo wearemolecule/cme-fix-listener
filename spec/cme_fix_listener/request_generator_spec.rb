@@ -3,6 +3,8 @@
 require "spec_helper"
 
 describe CmeFixListener::RequestGenerator do
+  include ActiveSupport::Testing::TimeHelpers
+
   let(:klass) { described_class }
   let(:instance) { klass.new(account) }
   let(:content_type) { "text/xml" }
@@ -26,7 +28,12 @@ describe CmeFixListener::RequestGenerator do
 
     context "initial subscription" do
       let(:file_name) { "trading_firm_initial_subscription.xml" }
-      it { expect(instance.build_xml("1")).to eq message_spec_xml }
+      let(:some_point_in_time) { Time.parse("2013-10-22T12:00:00-05:00") }
+      it "builds xml for initial request with hour of history" do
+        travel_to(some_point_in_time) do
+          expect(instance.build_xml("1")).to eq message_spec_xml
+        end
+      end
     end
 
     context "continued subscription" do
