@@ -32,7 +32,9 @@ describe CmeFixListener::HeartbeatManager do
 
     let(:timestamp) { Time.now }
     it "redis should have the correct members", redis: true do
-      expect(CmeFixListener::AvailabilityManager).to receive(:end_of_maintenance_window_timestamp).and_return(timestamp)
+      expect_any_instance_of(CmeFixListener::AvailabilityManager).to receive(
+        :end_of_maintenance_window_timestamp
+      ).and_return(timestamp)
       subject
       expect(Resque.redis.get("cme-heartbeat-123")).to eq timestamp.utc.iso8601
     end

@@ -12,7 +12,7 @@ module CmeFixListener
 
     def self.add_maintenance_window_heartbeat_for_account(account_id)
       catch_errors("set") do
-        timestamp = CmeFixListener::AvailabilityManager.end_of_maintenance_window_timestamp(Time.now).utc.iso8601
+        timestamp = CmeFixListener::AvailabilityManager.new(Time.now).end_of_maintenance_window_timestamp.utc.iso8601
         Resque.redis.set(key_name(account_id), timestamp)
       end
     end
