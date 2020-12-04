@@ -98,7 +98,7 @@ module Worker
 
     # CME goes down for maintenance. See the AvailabilityManager docs for more info.
     def inside_operating_window?
-      CmeFixListener::AvailabilityManager.available?(current_time)
+      CmeFixListener::AvailabilityManager.new(current_time).available?
     end
 
     def current_time

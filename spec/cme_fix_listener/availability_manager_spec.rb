@@ -4,10 +4,10 @@ require "spec_helper"
 
 describe CmeFixListener::AvailabilityManager do
   let(:klass) { described_class }
-  let(:zone) { klass.time_zone }
+  let(:zone) { klass::TIMEZONE }
 
   describe "CME Availability" do
-    subject { klass.available?(current_time) }
+    subject { klass.new(current_time).available? }
 
     context "wednesday not between 4:15pm and 5:00pm local time" do
       let(:current_time) do
@@ -75,7 +75,7 @@ describe CmeFixListener::AvailabilityManager do
   end
 
   describe ".end_of_maintenance_window_timestamp" do
-    subject { klass.end_of_maintenance_window_timestamp(current_time) }
+    subject { klass.new(current_time).end_of_maintenance_window_timestamp }
 
     context "weekday" do
       let(:current_time) do
