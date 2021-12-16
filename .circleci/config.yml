@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.3.7-jessie-node-browsers
+      - image: cimg/ruby:2.5.5
         environment:
           TZ: "America/Chicago"
       - image: redis:4.0-stretch
