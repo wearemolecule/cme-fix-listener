@@ -56,7 +56,7 @@ GEM
     redis (4.5.1)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
-    require_all (3.0.0)
+    require_all (1.5.0)
     resque (2.0.0)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
@@ -115,7 +115,7 @@ DEPENDENCIES
   pry-rescue
   rake
   redis
-  require_all
+  require_all (~> 1.5)
   resque (~> 2.0.0)
   rspec
   rspec_junit_formatter
@@ -126,4 +126,4 @@ RUBY VERSION
    ruby 2.5.5p157
 
 BUNDLED WITH
-   1.17.3
+   2.2.33
