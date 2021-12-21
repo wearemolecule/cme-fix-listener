@@ -6,7 +6,7 @@ AllCops:
     - "vendor/**/*"
     - "protobuf/**/*"
   UseCache: false
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
 LineLength:
   Max: 120
 Style/CollectionMethods:

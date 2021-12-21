@@ -7,12 +7,15 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.3.7-jessie-node-browsers
+      - image: cimg/ruby:2.5.5
         environment:
           TZ: "America/Chicago"
       - image: redis:4.0-stretch
 
     working_directory: ~/repo
+
+    environment:
+      TZ: "America/Chicago"
 
     steps:
       - checkout
@@ -24,7 +27,9 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            gem install bundler -v '2.2.33'
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+            apt-get update && apt-get install -y tzdata
 
       - save_cache:
           paths:
