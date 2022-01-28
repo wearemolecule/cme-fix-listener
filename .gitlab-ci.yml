@@ -3,12 +3,13 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
   - project: 'wearemolecule/gitlab-templates'
-    ref: docker-template
+    ref: master
     file: 'docker-build-template.yaml'
 
 stages:
   - test
   - build
+  - deploy
 
 # Cache modules in between jobs
 cache:
