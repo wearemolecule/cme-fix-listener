@@ -9,6 +9,8 @@ WORKDIR /usr/src/app
 
 COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
-RUN bundle install --without development test
+RUN gem install bundler --no-document && \
+    bundle config set --local without 'development test' && \
+    bundle install
 
 COPY . /usr/src/app
