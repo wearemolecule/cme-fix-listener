@@ -1,0 +1,37 @@
+---
+include:
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - project: 'wearemolecule/gitlab-templates'
+    ref: docker-template
+    file: 'docker-build-template.yaml'
+
+stages:
+  - test
+  - build
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - vendor/bundle
+  - .bundle
+
+tests:
+  stage: test
+  image: ruby:2.5.5
+  retry: 1
+  services:
+    - redis:4.0-stretch
+  variables:
+    TZ: "America/Chicago"
+  script:
+    - apt-get update && apt-get install -y tzdata
+    - mkdir test-results
+    - gem install bundler -v '2.2.33'
+    - bundle install --jobs=4 --retry=3 --path vendor/bundle
+    - bundle exec rspec --format progress --format RspecJunitFormatter --out test-results/rspec.xml
+  artifacts:
+    expire_in: 7d
+    paths:
+      - test-results/rspec.xml
