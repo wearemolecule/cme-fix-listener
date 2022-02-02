@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.5.5
+  - 3.0.3
 services:
   - redis-server
 before_install:
