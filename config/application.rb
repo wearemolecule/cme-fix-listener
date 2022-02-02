@@ -13,7 +13,10 @@ def app_init
 end
 
 def configure_honeybadger
-  Honeybadger.start(Honeybadger::Config.new(env: ENV["NAMESPACE"]))
+  Honeybadger.configure do |config|
+    config.api_key = ENV["HONEYBADGER_API_KEY"]
+    config.env = ENV["NAMESPACE"]
+  end
 end
 
 def configure_figaro
