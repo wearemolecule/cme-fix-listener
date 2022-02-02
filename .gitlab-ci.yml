@@ -20,7 +20,7 @@ cache:
 
 tests:
   stage: test
-  image: ruby:2.5.5
+  image: ruby:3.0.3
   retry: 1
   services:
     - redis:4.0-stretch
@@ -31,7 +31,7 @@ tests:
     - mkdir test-results
     - gem install bundler -v '2.2.33'
     - bundle install --jobs=4 --retry=3 --path vendor/bundle
-    - bundle exec rspec --format progress --format RspecJunitFormatter --out test-results/rspec.xml
+    - NAMESPACE=DEVELOPMENT bundle exec rspec --format progress --format RspecJunitFormatter --out test-results/rspec.xml
   artifacts:
     expire_in: 7d
     paths:

@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/ruby:2.5.5
+      - image: cimg/ruby:3.0.3
         environment:
           TZ: "America/Chicago"
       - image: redis:4.0-stretch
