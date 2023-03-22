@@ -1,18 +1,20 @@
 name: CI / CD
 
 # Controls when the action will run.
-on: [push]
-
-env:
-  TZ: "America/Chicago"
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     services:
-      
       redis:
-        image: redis:4.0-stretch
+        image: redis:7-alpine
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
@@ -20,6 +22,9 @@ jobs:
         ruby-version: 3.0.3
         bundler-cache: true
     - name: test
+      env:
+        REDIS_HOST: redis
+        TZ: "America/Chicago"
       run: |
         mkdir -p /tmp/test-results
         TEST_FILES=
