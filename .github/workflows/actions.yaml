@@ -1,0 +1,27 @@
+name: CI / CD
+
+# Controls when the action will run.
+on: [push]
+
+env:
+  TZ: "America/Chicago"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      
+      redis:
+        image: redis:4.0-stretch
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.3
+        bundler-cache: true
+    - name: test
+      run: |
+        mkdir -p /tmp/test-results
+        TEST_FILES=
+
+        bundle exec rspec --format progress
