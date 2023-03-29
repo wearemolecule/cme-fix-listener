@@ -5,10 +5,12 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       redis:
         image: redis:7-alpine
+        ports:
+        - 6379:6379
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -23,7 +25,8 @@ jobs:
         bundler-cache: true
     - name: test
       env:
-        REDIS_HOST: redis
+        REDIS_HOST: localhost
+        REDIS_PORT: ${{ job.services.redis.ports[6379] }}
         TZ: "America/Chicago"
       run: |
         mkdir -p /tmp/test-results
