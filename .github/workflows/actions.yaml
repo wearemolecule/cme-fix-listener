@@ -1,0 +1,35 @@
+name: CI / CD
+
+# Controls when the action will run.
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+        - 6379:6379
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.3
+        bundler-cache: true
+    - name: test
+      env:
+        REDIS_HOST: localhost
+        REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+        TZ: "America/Chicago"
+      run: |
+        mkdir -p /tmp/test-results
+        TEST_FILES=
+
+        bundle exec rspec --format progress
