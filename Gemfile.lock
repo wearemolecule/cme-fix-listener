@@ -22,15 +22,15 @@ GEM
     interception (0.5)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.7.1)
+    mini_portile2 (2.8.1)
     minitest (5.18.0)
     mono_logger (1.1.1)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    nokogiri (1.13.1)
-      mini_portile2 (~> 2.7.0)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (2.7.2.0)
@@ -44,7 +44,7 @@ GEM
     pry-rescue (1.5.2)
       interception (>= 0.5)
       pry (>= 0.12.0)
-    racc (1.6.0)
+    racc (1.6.2)
     rack (2.2.6.4)
     rack-protection (2.1.0)
       rack
@@ -107,7 +107,7 @@ DEPENDENCIES
   figaro
   honeybadger
   httparty
-  nokogiri (~> 1.13.1)
+  nokogiri (~> 1.13.10)
   pry
   pry-nav
   pry-rescue
