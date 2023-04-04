@@ -5,11 +5,17 @@ include:
   - project: 'wearemolecule/gitlab-templates'
     ref: master
     file: 'docker-build-template.yaml'
+  - project: 'wearemolecule/gitlab-templates'
+    ref: master
+    file: 'vapor-kustomize-deployment.yaml'  
 
 stages:
   - test
   - build
   - deploy
+
+variables:
+  NO_DEPLOY: 'true'
 
 # Cache modules in between jobs
 cache:
@@ -23,7 +29,7 @@ tests:
   image: ruby:3.0.3
   retry: 1
   services:
-    - redis:4.0-stretch
+    - redis:7-alpine
   variables:
     TZ: "America/Chicago"
   script:
