@@ -1,7 +1,7 @@
 ![Molecule Software](https://avatars1.githubusercontent.com/u/2736908?v=3&s=100 "Molecule Software")
 # CME STP Adapter
 
-[![GitHub Actions](https://github.com/wearemolecule/cme-fix-listener/actions/workflows/actions.yml/badge.svg)](https://github.com/wearemolecule/cme-fix-listener/actions)
+[![GitHub Actions](https://github.com/wearemolecule/cme-fix-listener/actions/workflows/actions.yaml/badge.svg)](https://github.com/wearemolecule/cme-fix-listener/actions)
 [![Docker Repository on Quay](https://quay.io/repository/molecule/cme-fix-listener/status "Docker Repository on Quay")](https://quay.io/repository/molecule/cme-fix-listener)
 
 A service that connects to the [CME's Straight Through Processing API](http://www.cmegroup.com/confluence/display/EPICSANDBOX/CME+STP) to download trades in FIXML format, and returns easy-to-read, JSON-formatted trades.
