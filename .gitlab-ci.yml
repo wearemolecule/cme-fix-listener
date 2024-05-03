@@ -16,6 +16,7 @@ stages:
 
 variables:
   NO_DEPLOY: 'true'
+  K8S_APP_OVERWRITE: cme-fix-listener
 
 # Cache modules in between jobs
 cache:
