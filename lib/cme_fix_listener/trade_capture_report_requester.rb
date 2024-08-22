@@ -59,9 +59,9 @@ module CmeFixListener
 
     def cme_url
       if @environment.casecmp("production").zero?
-        "https://services.cmegroup.com/cmestp/query"
+        "https://posttrade.api.cmegroup.com/cmestp/query"
       else
-        "https://servicesnr.cmegroup.com/cmestp/query"
+        "https://posttrade.api.uat.cmegroup.com/cmestp/query"
       end
     end
 

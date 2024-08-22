@@ -94,14 +94,14 @@ describe CmeFixListener::TradeCaptureReportRequester do
 
   def failed_httparty_response
     configurable_sleep_stub
-    allow(HTTParty).to receive(:post).with("https://services.cmegroup.com/cmestp/query", response_body).
+    allow(HTTParty).to receive(:post).with("https://posttrade.api.cmegroup.com/cmestp/query", response_body).
       and_raise(Net::ReadTimeout)
     expect(response).to eq nil
     expect(HTTParty).to have_received(:post).twice
   end
 
   def successful_httparty_response
-    allow(HTTParty).to receive(:post).with("https://services.cmegroup.com/cmestp/query", response_body).
+    allow(HTTParty).to receive(:post).with("https://posttrade.api.cmegroup.com/cmestp/query", response_body).
       and_return(:success)
     expect(response).to eq :success
     expect(HTTParty).to have_received(:post).once
