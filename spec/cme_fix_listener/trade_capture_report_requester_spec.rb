@@ -128,10 +128,16 @@ describe CmeFixListener::TradeCaptureReportRequester do
       include_examples "posts to CME url", "https://posttrade.api.cmegroup.com/cmestp/query"
     end
 
-    context "when CME_HOST is set" do
+    context "when CME_HOST is set to a non-UAT host" do
       before { stub_const("ENV", ENV.to_h.merge("CME_HOST" => "https://custom.example.com")) }
 
       include_examples "posts to CME url", "https://custom.example.com/cmestp/query"
+    end
+
+    context "when CME_HOST is set to a UAT host" do
+      before { stub_const("ENV", ENV.to_h.merge("CME_HOST" => "https://stpfix.api.uat.cmegroup.com")) }
+
+      include_examples "posts to CME url", "https://stpfix.api.uat.cmegroup.com/autocert/cmestp/query"
     end
   end
 end

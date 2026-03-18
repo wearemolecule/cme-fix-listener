@@ -61,11 +61,23 @@ module CmeFixListener
     end
 
     def cme_url
-      "#{cme_host}/cmestp/query"
+      "#{cme_host}#{cme_path}"
     end
 
     def cme_host
       ENV.fetch("CME_HOST", DEFAULT_CME_HOST)
+    end
+
+    def cme_path
+      "#{path_prefix}/cmestp/query"
+    end
+
+    def path_prefix
+      uat_host? ? "/autocert" : ""
+    end
+
+    def uat_host?
+      cme_host.match?(/\.uat\./)
     end
   end
 end
