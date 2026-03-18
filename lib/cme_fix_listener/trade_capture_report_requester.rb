@@ -5,6 +5,8 @@ module CmeFixListener
   # Given the username, password, and url from the account it will POST to CME with the correct header and body.
   # If the requests fails it will retry twice and then bail.
   class TradeCaptureReportRequester
+    PLAIN_TEXT_HEADER = { "Content-Type" => "text/plain", "Accept-Encoding" => "gzip, deflate" }.freeze
+
     include HTTParty
 
     attr_accessor :account, :username, :password, :url, :request_generator
@@ -15,14 +17,15 @@ module CmeFixListener
       @password = account["cmePassword"]
       @environment = account["cmeEnvironment"]
       @request_generator = CmeFixListener::RequestGenerator.new(account)
+      @base_options = { basic_auth: { username: @username, password: @password } }
     end
 
     def new_client_request(_token)
-      post_client_request("1", plain_text_header)
+      post_client_request("1", PLAIN_TEXT_HEADER)
     end
 
     def existing_client_request(token)
-      post_client_request("3", token_header(token))
+      post_client_request("3", PLAIN_TEXT_HEADER.merge("x-cme-token" => token))
     end
 
     private
@@ -50,7 +53,7 @@ module CmeFixListener
 
     def post_http_request(body, header)
       return if body.blank?
-      HTTParty.post(cme_url, base_options.merge(body: body, headers: header))
+      self.class.post(cme_url, @base_options.merge(body: body, headers: header))
     end
 
     def request_body(request_type)
@@ -58,31 +61,15 @@ module CmeFixListener
     end
 
     def cme_url
+      "#{cme_host}/cmestp/query"
+    end
+
+    def cme_host
       if @environment.casecmp("production").zero?
-        "https://posttrade.api.cmegroup.com/cmestp/query"
+        "https://posttrade.api.cmegroup.com"
       else
-        "https://posttrade.api.uat.cmegroup.com/cmestp/query"
+        "https://posttrade.api.uat.cmegroup.com"
       end
-    end
-
-    def base_options
-      {
-        basic_auth: {
-          username: @username,
-          password: @password
-        }
-      }
-    end
-
-    def plain_text_header
-      {
-        "Content-Type" => "text/plain",
-        "Accept-Encoding" => "gzip, deflate"
-      }
-    end
-
-    def token_header(token)
-      plain_text_header.merge("x-cme-token" => token)
     end
   end
 end
