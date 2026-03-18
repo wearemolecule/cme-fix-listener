@@ -5,6 +5,7 @@ module CmeFixListener
   # Given the username, password, and url from the account it will POST to CME with the correct header and body.
   # If the requests fails it will retry twice and then bail.
   class TradeCaptureReportRequester
+    DEFAULT_CME_HOST = "https://posttrade.api.cmegroup.com"
     PLAIN_TEXT_HEADER = { "Content-Type" => "text/plain", "Accept-Encoding" => "gzip, deflate" }.freeze
 
     include HTTParty
@@ -15,7 +16,6 @@ module CmeFixListener
       @account = account
       @username = account["cmeUsername"]
       @password = account["cmePassword"]
-      @environment = account["cmeEnvironment"]
       @request_generator = CmeFixListener::RequestGenerator.new(account)
       @base_options = { basic_auth: { username: @username, password: @password } }
     end
@@ -65,11 +65,7 @@ module CmeFixListener
     end
 
     def cme_host
-      if @environment.casecmp("production").zero?
-        "https://posttrade.api.cmegroup.com"
-      else
-        "https://posttrade.api.uat.cmegroup.com"
-      end
+      ENV.fetch("CME_HOST", DEFAULT_CME_HOST)
     end
   end
 end

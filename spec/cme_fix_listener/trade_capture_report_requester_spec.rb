@@ -9,8 +9,7 @@ describe CmeFixListener::TradeCaptureReportRequester do
       "id" => 123,
       "name" => "Account1",
       "cmeUsername" => "USERNAME_SPEC",
-      "cmePassword" => "PASSWORD_SPEC",
-      "cmeEnvironment" => "production"
+      "cmePassword" => "PASSWORD_SPEC"
     }
   end
   let(:body) { "body" }
@@ -22,6 +21,23 @@ describe CmeFixListener::TradeCaptureReportRequester do
         password: "PASSWORD_SPEC"
       }
     }
+  end
+
+  shared_examples "posts to CME url" do |expected_url|
+    before do
+      allow(described_class).to receive(:post).with(
+        expected_url,
+        base_auth.merge(body: body, headers: plain_text_header)
+      ).and_return(:success)
+    end
+
+    it "posts to #{expected_url}" do
+      instance.new_client_request(nil)
+      expect(described_class).to have_received(:post).with(
+        expected_url,
+        base_auth.merge(body: body, headers: plain_text_header)
+      ).once
+    end
   end
 
   shared_examples "successful http request" do
@@ -101,5 +117,21 @@ describe CmeFixListener::TradeCaptureReportRequester do
 
     include_examples "successful http request"
     include_examples "failed http request"
+  end
+
+  describe "CME_HOST configuration" do
+    before { allow(instance).to receive(:request_body).and_return(body) }
+
+    context "when CME_HOST is not set" do
+      before { stub_const("ENV", ENV.to_h.except("CME_HOST")) }
+
+      include_examples "posts to CME url", "https://posttrade.api.cmegroup.com/cmestp/query"
+    end
+
+    context "when CME_HOST is set" do
+      before { stub_const("ENV", ENV.to_h.merge("CME_HOST" => "https://custom.example.com")) }
+
+      include_examples "posts to CME url", "https://custom.example.com/cmestp/query"
+    end
   end
 end
