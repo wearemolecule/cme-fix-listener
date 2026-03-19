@@ -15,6 +15,12 @@ module CmeFixListener
       end
     end
 
+    def self.clear_token_for_account(account_id)
+      catch_errors("delete") do
+        Resque.redis.del(key_name(account_id))
+      end
+    end
+
     def self.key_name(account_id)
       "cme-token-#{account_id}"
     end

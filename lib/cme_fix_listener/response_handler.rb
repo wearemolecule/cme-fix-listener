@@ -62,8 +62,13 @@ module CmeFixListener
     end
 
     def handle_error(parser, body)
-      notify_admins_of_error(CmeResponseHasErrors, body_error_message, body_error_context(parser, body))
-      @body_has_errors = true
+      if invalid_token?(parser.request_acknowledgement_text.downcase)
+        Logging.logger.warn { "Invalid x-cme-token for account #{account_id}. Clearing token to initiate new subscription." }
+        CmeFixListener::TokenManager.clear_token_for_account(@account_id)
+      else
+        notify_admins_of_error(CmeResponseHasErrors, body_error_message, body_error_context(parser, body))
+        @body_has_errors = true
+      end
       nil
     end
 

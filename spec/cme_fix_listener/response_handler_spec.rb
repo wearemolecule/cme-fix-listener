@@ -3,8 +3,7 @@
 require "spec_helper"
 
 describe CmeFixListener::ResponseHandler do
-  let(:klass) { described_class }
-  let(:instance) { klass.new(account) }
+  let(:instance) { described_class.new(account) }
   let(:account) { { "id" => 123 } }
   let(:time_zone) { "Central Time (US & Canada)" }
   let(:token_manager_klass) { CmeFixListener::TokenManager }
@@ -90,6 +89,64 @@ describe CmeFixListener::ResponseHandler do
       it "should short circuit" do
         expect_any_instance_of(parser_klass).to receive(:parse_fixml).and_return("return")
         expect(subject).to eq "return"
+      end
+    end
+  end
+
+  describe "#handle_error" do
+    let(:parser) { instance_double(parser_klass, request_acknowledgement_text: error_text) }
+
+    subject { instance.handle_error(parser, "body") }
+
+    context "when the error is an invalid token" do
+      let(:error_text) { "x-cme-token is no longer valid. Please initiate a new subscription" }
+
+      it "clears the token from Redis" do
+        expect(token_manager_klass).to receive(:clear_token_for_account).with(123)
+        subject
+      end
+
+      it "does not notify Honeybadger" do
+        allow(token_manager_klass).to receive(:clear_token_for_account)
+        expect(Honeybadger).not_to receive(:notify)
+        subject
+      end
+
+      it "does not set body_has_errors" do
+        allow(token_manager_klass).to receive(:clear_token_for_account)
+        subject
+        expect(instance.experiencing_problems?).to eq false
+      end
+
+      it "returns nil" do
+        allow(token_manager_klass).to receive(:clear_token_for_account)
+        expect(subject).to be_nil
+      end
+    end
+
+    context "when the error is a different CME error" do
+      let(:error_text) { "not entitled to query" }
+
+      it "notifies Honeybadger" do
+        expect(Honeybadger).to receive(:notify)
+        subject
+      end
+
+      it "sets body_has_errors" do
+        allow(Honeybadger).to receive(:notify)
+        subject
+        expect(instance.experiencing_problems?).to eq true
+      end
+
+      it "does not clear the token" do
+        allow(Honeybadger).to receive(:notify)
+        expect(token_manager_klass).not_to receive(:clear_token_for_account)
+        subject
+      end
+
+      it "returns nil" do
+        allow(Honeybadger).to receive(:notify)
+        expect(subject).to be_nil
       end
     end
   end
