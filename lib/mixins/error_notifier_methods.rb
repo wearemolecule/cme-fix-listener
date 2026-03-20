@@ -41,4 +41,8 @@ module ErrorNotifierMethods
   def query_error_message
     "Request ID or Party Role most likely not set correctly"
   end
+
+  def invalid_token?(error_txt)
+    (error_txt =~ /no longer valid/).present?
+  end
 end
