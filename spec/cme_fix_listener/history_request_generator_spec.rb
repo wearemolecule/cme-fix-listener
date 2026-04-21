@@ -36,5 +36,14 @@ describe CmeFixListener::HistoryRequestGenerator do
       let(:instance) { klass.new(account, "test", nil) }
       it { expect(instance.build_xml("1")).to eq nil }
     end
+
+    context "with multiple firm SIDs" do
+      let(:file_name) { "history_request_two_firms.xml" }
+      let(:account) do
+        super().merge("cmeFirmSid" => "FIRM_A, FIRM_B")
+      end
+
+      it { expect(instance.build_xml("1")).to eq message_spec_xml }
+    end
   end
 end

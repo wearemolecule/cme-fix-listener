@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<FIXML v="5.0 SP2" s="20090815" xv="109" cv="CME.0001">
+  <TrdCaptRptReq ReqID="DEVELOPMENT-400-REGULAR-COMPANY_NAME" ReqTyp="1" SubReqTyp="1" MLegRptTyp="3" StartTm="2013-10-22T11:00:00-05:00">
+    <Hdr SID="FIRM_A" TID="CME" SSub="USERNAME_SPEC" TSub="STP"/>
+    <Pty ID="FIRM_A" R="7"/>
+    <Pty ID="FIRM_B" R="7"/>
+  </TrdCaptRptReq>
+</FIXML>

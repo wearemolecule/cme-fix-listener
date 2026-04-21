@@ -17,7 +17,7 @@ module CmeFixListener
         xml.FIXML(fixml_attrs) do
           xml.TrdCaptRptReq(trd_cpt_rpt_request_attrs(request_type).merge(history_params)) do
             xml.Hdr(header_attrs)
-            xml.Pty(party_attrs)
+            firm_sids.each { |sid| xml.Pty(party_attrs_for(sid)) }
           end
         end
       end.to_xml

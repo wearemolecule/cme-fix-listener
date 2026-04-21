@@ -22,13 +22,18 @@ module CmeFixListener
         xml.FIXML(fixml_attrs) do
           xml.TrdCaptRptReq(trd_cpt_rpt_request_attrs(request_type).merge(params)) do
             xml.Hdr(header_attrs)
-            xml.Pty(party_attrs)
+            firm_sids.each { |sid| xml.Pty(party_attrs_for(sid)) }
           end
         end
       end.to_xml
     end
 
     protected
+
+    # One or more firm SIDs from account (comma-separated). Header SID uses the first; each becomes a Pty.
+    def firm_sids
+      @firm_sids ||= @firm_sid.to_s.split(",").map(&:strip).reject(&:blank?)
+    end
 
     def initial_history(request_type)
       return {} if request_type != "1"
@@ -62,16 +67,16 @@ module CmeFixListener
 
     def header_attrs
       {
-        SID: @firm_sid,
+        SID: firm_sids.first,
         TID: "CME",
         SSub: @username,
         TSub: "STP"
       }
     end
 
-    def party_attrs
+    def party_attrs_for(sid)
       {
-        ID: @firm_sid,
+        ID: sid,
         R: @party_role
       }
     end
