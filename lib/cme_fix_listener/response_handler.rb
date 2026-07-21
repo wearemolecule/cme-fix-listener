@@ -20,6 +20,7 @@ module CmeFixListener
       @account_id = account["id"]
       @body_has_errors = false
       @token = nil
+      @invalid_token_cleared = false
     end
 
     def experiencing_problems?
@@ -28,9 +29,8 @@ module CmeFixListener
 
     def handle_cme_response(cme_response)
       parsed_headers = parse_headers(cme_response.headers)
-      handle_headers(parsed_headers, cme_response.headers)
       parsed_body = parse_body(cme_response.body)
-      handle_body(parsed_body)
+      commit_parsed_response(parsed_headers, parsed_body, cme_response.headers)
     end
 
     def parse_headers(headers)
@@ -39,6 +39,20 @@ module CmeFixListener
         "account_id" => @account_id,
         "created_at" => headers["date"]
       }
+    end
+
+    # Atomically advances the CME poll cursor and enqueues the trade batch so a
+    # mid-poll crash cannot leave the cursor advanced without the batch queued.
+    def commit_parsed_response(parsed_headers, parsed_body, raw_headers)
+      return if @invalid_token_cleared
+
+      if parsed_headers["token"].blank?
+        notify_admins_of_error(TokenNotFound, header_error_message, header_error_context(raw_headers, parsed_headers))
+        handle_body(parsed_body)
+      else
+        message = parsed_body.blank? ? nil : parsed_body.to_json
+        CmeFixListener::ResqueManager.persist_token_and_enqueue(@account_id, parsed_headers["token"], message)
+      end
     end
 
     def handle_headers(parsed_headers, raw_headers)
@@ -65,6 +79,7 @@ module CmeFixListener
       if invalid_token?(parser.request_acknowledgement_text.downcase)
         Logging.logger.warn { "Invalid x-cme-token for account #{account_id}. Clearing token to initiate new subscription." }
         CmeFixListener::TokenManager.clear_token_for_account(@account_id)
+        @invalid_token_cleared = true
       else
         notify_admins_of_error(CmeResponseHasErrors, body_error_message, body_error_context(parser, body))
         @body_has_errors = true
