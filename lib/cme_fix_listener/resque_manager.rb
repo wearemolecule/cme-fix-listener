@@ -8,6 +8,16 @@ module CmeFixListener
       push(enqueue_item(account_id, msg))
     end
 
+    # Persist the CME poll cursor (token) and optionally enqueue the trade batch
+    # in a single Redis MULTI/EXEC so a crash cannot advance the cursor without
+    # durably queuing the messages from that poll.
+    def self.persist_token_and_enqueue(account_id, token, msg = nil)
+      Resque.redis.multi do
+        Resque.redis.rpush(TokenManager.key_name(account_id), token)
+        push(enqueue_item(account_id, msg)) if msg.present?
+      end
+    end
+
     def self.enqueue_item(account_id, msg)
       {
         "class" => ENV["REDIS_CLASS_NAME"],

@@ -13,16 +13,60 @@ describe CmeFixListener::ResponseHandler do
   describe "#handle_cme_response" do
     let(:cme_response) { double(body: body, headers: headers) }
     let(:body) { "body" }
-    let(:headers) { "headers" }
+    let(:headers) { { "x-cme-token" => "tok-1", "date" => "Mon, 01 Jan 2024" } }
+    let(:parsed_body) { [{ "trade" => 1 }] }
 
     subject { instance.handle_cme_response(cme_response) }
 
-    it "should make the appropriate method calls" do
-      expect(instance).to receive(:parse_headers).with(headers).and_return("123")
-      expect(instance).to receive(:handle_headers).with("123", headers).and_return(nil)
-      expect(instance).to receive(:parse_body).with(body).and_return("abc")
-      expect(instance).to receive(:handle_body).with("abc").and_return(nil)
+    before do
+      allow_any_instance_of(parser_klass).to receive(:request_acknowledgement_text).and_return(nil)
+      allow_any_instance_of(parser_klass).to receive(:parse_fixml).and_return(parsed_body)
+    end
+
+    it "persists the token and trade batch together after parsing" do
+      expect(resque_klass).to receive(:persist_token_and_enqueue).with(123, "tok-1", parsed_body.to_json)
+      expect(token_manager_klass).not_to receive(:add_token_for_account)
+      expect(resque_klass).not_to receive(:enqueue)
       subject
+    end
+
+    context "when a crash occurs after the CME response is received but before Redis commit" do
+      before do
+        allow(resque_klass).to receive(:persist_token_and_enqueue).and_raise(Redis::CannotConnectError)
+      end
+
+      it "does not leave the poll cursor advanced without the batch queued" do
+        expect(token_manager_klass).not_to receive(:add_token_for_account)
+        expect(resque_klass).not_to receive(:enqueue)
+        expect { subject }.to raise_error(Redis::CannotConnectError)
+      end
+    end
+
+    context "when the response has an invalid token error" do
+      before do
+        allow_any_instance_of(parser_klass).to receive(:request_acknowledgement_text)
+          .and_return("x-cme-token is no longer valid. Please initiate a new subscription")
+        allow(token_manager_klass).to receive(:clear_token_for_account)
+      end
+
+      it "clears the token and does not re-advance the cursor" do
+        expect(token_manager_klass).to receive(:clear_token_for_account).with(123)
+        expect(resque_klass).not_to receive(:persist_token_and_enqueue)
+        expect(resque_klass).not_to receive(:enqueue)
+        subject
+      end
+    end
+
+    context "when the token is missing" do
+      let(:headers) { { "date" => "Mon, 01 Jan 2024" } }
+
+      before { allow(Honeybadger).to receive(:notify) }
+
+      it "notifies and still enqueues the body without advancing a token" do
+        expect(resque_klass).to receive(:enqueue).with(123, parsed_body.to_json)
+        expect(resque_klass).not_to receive(:persist_token_and_enqueue)
+        subject
+      end
     end
   end
 
@@ -168,6 +212,31 @@ describe CmeFixListener::ResponseHandler do
 
       it "should publish to resque" do
         expect(resque_klass).to receive(:enqueue).with(123, parsed_body.to_json)
+        subject
+      end
+    end
+  end
+
+  describe "#commit_parsed_response" do
+    let(:raw_headers) { { "x-cme-token" => "tok-1" } }
+    let(:parsed_headers) { { "token" => "tok-1", "account_id" => 123 } }
+
+    subject { instance.commit_parsed_response(parsed_headers, parsed_body, raw_headers) }
+
+    context "when the parsed body is blank" do
+      let(:parsed_body) { nil }
+
+      it "advances the token without enqueueing" do
+        expect(resque_klass).to receive(:persist_token_and_enqueue).with(123, "tok-1", nil)
+        subject
+      end
+    end
+
+    context "when the parsed body is present" do
+      let(:parsed_body) { [{ "qty" => 47 }] }
+
+      it "advances the token and enqueues the batch together" do
+        expect(resque_klass).to receive(:persist_token_and_enqueue).with(123, "tok-1", parsed_body.to_json)
         subject
       end
     end
