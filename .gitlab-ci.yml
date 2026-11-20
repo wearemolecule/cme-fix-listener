@@ -27,7 +27,7 @@ cache:
 
 tests:
   stage: test
-  image: ruby:3.0.3
+  image: ruby:3.4.13
   retry: 1
   services:
     - redis:7-alpine
@@ -36,8 +36,9 @@ tests:
   script:
     - apt-get update && apt-get install -y tzdata
     - mkdir test-results
-    - gem install bundler -v '2.2.33'
-    - bundle install --jobs=4 --retry=3 --path vendor/bundle
+    - gem install bundler -v '2.6.9'
+    - bundle config set --local path vendor/bundle
+    - bundle install --jobs=4 --retry=3
     - NAMESPACE=DEVELOPMENT bundle exec rspec --format progress --format RspecJunitFormatter --out test-results/rspec.xml
   artifacts:
     expire_in: 7d

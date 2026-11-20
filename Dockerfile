@@ -1,4 +1,4 @@
-FROM ruby:3.0.3
+FROM ruby:3.4.13
 
 RUN bundle config --global frozen 1
 
@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
-RUN gem install bundler --no-document && \
+RUN gem install bundler -v '2.6.9' --no-document && \
     bundle config set --local without 'development test' && \
     bundle install
 

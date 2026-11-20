@@ -39,7 +39,7 @@ module CmeFixListener
       return {} if request_type != "1"
       start_time = Time.now - 1.hour
       {
-        "StartTm" => start_time.to_s(:iso8601)
+        "StartTm" => start_time.iso8601
       }
     end
 
